@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://observatorio-grupos-de-trabalho.nina-and-tom-9604.chatgpt.site/sitemap.xml

@@ -1,0 +1,50 @@
+{
+  "cutoff": "2026-10-10",
+  "metrics": {
+    "total": 122,
+    "governments": {
+      "XXIV": 74,
+      "XXV": 48
+    },
+    "statuses": {
+      "Concluído no prazo": 1,
+      "Concluído com atraso": 1,
+      "Em curso – dentro do prazo": 18,
+      "Em atraso": 60,
+      "Prorrogado": 4,
+      "Extinto / substituído": 2,
+      "Sem informação pública": 36
+    },
+    "creating_acts": 116,
+    "deadlines": 441,
+    "average_delay": 375.2,
+    "max_delay": 888,
+    "no_information_percent": 29.508196721311474,
+    "months": 31,
+    "monthly_allocated_urls": 3142,
+    "screened_urls": 3251,
+    "reviewed_acts": 292
+  },
+  "validation": {
+    "unique_ids": true,
+    "valid_sources": true,
+    "referential_integrity": true,
+    "translation_records": 122
+  },
+  "source": {
+    "file": "fonte-original.xlsx",
+    "sha256": "20d0198be1c0ad9871b360cafc7f33753ef83d681f9ec85e25f30246a5006151",
+    "header_rows": {
+      "Groups": 5,
+      "Deadlines": 5,
+      "Issuing portfolios": 5,
+      "Related bodies": 5,
+      "Discovery gaps": 5,
+      "Coverage": 5,
+      "Act review": 5,
+      "Search log": 5,
+      "Methodology": 5
+    },
+    "filename": "source.xlsx"
+  }
+}

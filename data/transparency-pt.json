@@ -1,0 +1,197 @@
+{
+  "methodology": [
+    {
+      "topic": "Âmbito",
+      "text": "Grupos de trabalho do Governo português constituídos por uma disposição expressa entre 2 de abril de 2024 e 10 de outubro de 2026. Incluem-se os grupos técnicos de trabalho identificados; excluem-se as criações de municípios, exclusivamente dos governos regionais, de universidades, de ordens profissionais e os grupos estritamente internos de organismos. As entidades regionais continuam a constar quando integram grupos do Governo central."
+    },
+    {
+      "topic": "Atribuição ao Governo",
+      "text": "XXIV: criação ou aprovação entre 2 de abril de 2024 e 4 de junho de 2025. XXV: a partir de 5 de junho de 2025. Usa-se a data de assinatura ou aprovação, e não apenas a publicação; havendo várias assinaturas, considera-se a última. Os identificadores ordenados pela publicação servem para identificar os registos, não para estabelecer a cronologia da criação. Quando o ato é omisso, não se presume uma data legal de entrada em vigor."
+    },
+    {
+      "topic": "Pesquisa de identificação",
+      "text": "Pesquisas na plataforma do Diário da República para todo o período, sem filtros de estado: «grupo de trabalho» (1341 registos), «grupos de trabalho» (2246), «grupo técnico de trabalho» (6) e «grupos técnicos de trabalho» (4). Todas as páginas de resultados, ordenadas por data crescente, foram recolhidas; após eliminação de duplicados, ficaram 3251 URL distintos. Os sumários foram examinados para identificar ministérios, Secretarias de Estado e expressões de criação; foram lidos integralmente 292 atos selecionados. As pesquisas abrangem as duas séries e os suplementos."
+    },
+    {
+      "topic": "Lotes e cobertura",
+      "text": "A cobertura inclui os 31 meses de publicação entre abril de 2024 e outubro de 2026, incluindo meses sem grupos encontrados e os meses inicial e final incompletos. A pesquisa de todo o intervalo não garante a identificação de todos os grupos não publicados ou descritos de forma indireta."
+    },
+    {
+      "topic": "Unidade de contagem",
+      "text": "Uma linha por grupo constituído separadamente, e não por referência ou alteração. O Despacho n.º 10294-C/2024 cria três grupos; o Despacho n.º 5543-A/2025 cria cinco grupos regionais. Os Despachos n.os 6564/2024 e 8252/2024 relativos ao SNS24 são tratados como um único grupo que prossegue com composição alargada e a mesma data retroativa de início. As mudanças de nome do grupo da reforma do Estado contam uma única vez. As constituições distintas relativas ao abastecimento de medicamentos mantêm-se em duas linhas porque a continuidade ou revogação não é expressa; a possível sobreposição é assinalada."
+    },
+    {
+      "topic": "Resultados e fontes",
+      "text": "Foram efetuadas 116 pesquisas específicas de resultados em domínios oficiais, além do cruzamento com atos posteriores, da consulta da legislação vigente sobre passaportes, de repositórios de relatórios e de pesquisas adicionais sobre entregas com informação contraditória. Apenas fontes primárias sustentam as afirmações de cada registo. As datas e os termos exatos das pesquisas constam da folha Search log. Não se afirma que todas as respostas parlamentares ou todos os relatórios anuais dos organismos tenham sido analisados. Notícias de fontes secundárias não foram usadas como prova do estado."
+    },
+    {
+      "topic": "Regra de classificação do estado",
+      "text": "Data de referência para um resultado ultrapassada e ausência de prova pública da entrega: Em atraso. Data de referência principal ainda futura: Em curso – dentro do prazo, sem certificar o cumprimento de etapas anteriores. Prorrogação formal com mandato atual futuro ou sem data: Prorrogado; se a prorrogação terminou e não há prova de entrega, o estado volta a Em atraso. Revogação ou substituição expressa: Extinto / substituído. A conclusão no prazo ou com atraso só é classificada quando existem provas datadas suficientes."
+    },
+    {
+      "topic": "Prazo de entrega não verificável",
+      "text": "Um relatório público, a aprovação de uma medida ou o reconhecimento da entrega pode comprovar um resultado sem estabelecer a data da sua receção interna. Nesses casos, usa-se Sem informação pública quando não é possível verificar o cumprimento do prazo. Datas oficiais contraditórias recebem o mesmo estado. Esta categoria inclui, por isso, resultados confirmados cujo momento de entrega não é verificável; não equivale à ausência total de informação."
+    },
+    {
+      "topic": "Mapa de prazos",
+      "text": "A folha Deadlines conserva as disposições com prazo do ato de criação, as obrigações periódicas, os prazos de designação e planeamento, as prorrogações posteriores e as datas de referência para acompanhamento, claramente identificadas. O estado do grupo segue a data de referência escolhida para o seu resultado substantivo ou mandato; etapas intermédias vencidas permanecem visíveis separadamente. Os calendários de programas mais amplos e as datas de estudos de infraestruturas são identificados como obrigações contextuais de política pública."
+    },
+    {
+      "topic": "Convenção de contagem",
+      "text": "Exclui-se o dia que serve de referência ao início da contagem. Os prazos expressos em dias úteis excluem sábados, domingos e feriados nacionais previstos na lei. Os prazos que dizem apenas dias usam uma contagem de acompanhamento em dias de calendário; quando é plausível uma interpretação procedimental ao abrigo do CPA, até 180 dias, apresenta-se também a alternativa em dias úteis. Os dias expressamente consecutivos usam dias de calendário. Meses e anos terminam na data correspondente do calendário, limitada ao último dia do mês quando necessário. Não se incluem feriados municipais nem tolerâncias de ponto."
+    },
+    {
+      "topic": "Inícios de contagem não verificados",
+      "text": "Quando a constituição, o início dos trabalhos, o encerramento de uma consulta ou a entrega de um relatório anterior constitui um evento de início não verificado, não se inventa uma data legal exata de vencimento. As datas ilustrativas são identificadas como tal e não demonstram conclusão tardia. Os prazos sem evento de início expresso são apresentados com a hipótese usada para o acompanhamento."
+    },
+    {
+      "topic": "Conversão de períodos",
+      "text": "O segundo trimestre de 2026 corresponde a 1 de abril–30 de junho de 2026. A expressão «a partir do segundo trimestre», relativa ao passaporte, é uma meta de disponibilização, não um último dia obrigatório expresso; usa-se 30 de junho como referência conservadora de acompanhamento. Os períodos semestrais e de fim de ano são convertidos para as suas datas finais e identificados como tal."
+    },
+    {
+      "topic": "Cálculo do atraso",
+      "text": "Em atraso: máximo de zero ou da diferença entre a data de referência da análise e a data principal atualmente aplicável. Concluído com atraso: data comprovada da entrega menos a data de vencimento atual. Conclusão no prazo: zero. Nos restantes estados, o campo fica vazio. O atraso resultante da contagem alternativa é apresentado separadamente. A média e o maior atraso atual no painel incluem apenas Em atraso; o atraso dos grupos concluídos tardiamente é apresentado à parte. A ausência de prova não é apresentada como prova de que não houve entrega."
+    },
+    {
+      "topic": "Contagens por ministério",
+      "text": "As áreas ministeriais são normalizadas a partir do cabeçalho dos ministérios emitentes no Diário da República, conservando também a identificação completa dos gabinetes originais. Quando o cabeçalho usa a Presidência como designação abrangente, um gabinete emitente expressamente identificado de infraestruturas, habitação, mobilidade ou coesão territorial é também atribuído à respetiva área ministerial. Os atos conjuntos contam em cada área emitente, pelo que as contagens se sobrepõem. Os atos do Conselho de Ministros permanecem em Presidência / Conselho de Ministros, salvo se a fonte identificar outros gabinetes emitentes; a área de política pública é um campo separado. A folha Issuing portfolios regista a correspondência entre grupos e áreas ministeriais."
+    },
+    {
+      "topic": "Relatório e execução da política",
+      "text": "A prova da entrega do relatório ou de outro resultado e a prova da execução da política têm colunas separadas. A aprovação de uma lei não estabelece a data da entrega interna do grupo. As cláusulas de extinção dependentes da entrega ou aprovação não são tratadas como revogações datadas sem confirmação de que a condição foi cumprida."
+    },
+    {
+      "topic": "Limites de exaustividade",
+      "text": "Este é um inventário documentado de registos públicos, não um recenseamento certificado. As 9 linhas da folha Discovery gaps incluem 7 pistas por esclarecer e 2 exclusões por fronteira temporal: constituições delegadas ou coletivas, decisões originais não publicadas ou não localizadas e atos anteriores ao XXIV Governo. Os grupos temáticos do CDAP, os subgrupos das estratégias para as crianças e para a deficiência, o SAFE e os grupos preparatórios de organismos exigem os registos originais. A folha Related bodies é uma lista selecionada de 15 entidades encontradas durante a pesquisa dos grupos de trabalho, não um recenseamento de todas as comissões ou equipas."
+    },
+    {
+      "topic": "Atualização",
+      "text": "Os estados baseados nas provas ficam fixados em 10 de outubro de 2026. Alterar a data de referência na folha Dashboard recalcula apenas o atraso; não pesquisa novas provas nem valida automaticamente o estado. Antes de publicar versões posteriores, é necessário rever os atos originais e de alteração e atualizar a prova da entrega."
+    },
+    {
+      "topic": "Utilização da folha de cálculo",
+      "text": "A folha Groups e os mapas de prazos são tabelas nativas do Excel com filtros. As células longas conservam o texto integral; aumente a altura da linha ou use a barra de fórmulas para o ler. As disposições numeradas em português mantêm a numeração do próprio ato. Os URL das fontes e as ligações clicáveis para os atos de criação acompanham cada registo."
+    },
+    {
+      "topic": "Referência — início do XXV Governo",
+      "text": "https://portugal.gov.pt/gc25/comunicacao/noticias/resolver-os-problemas-das-pessoas-e-transformar-portugal"
+    },
+    {
+      "topic": "Referência — feriados nacionais",
+      "text": "Código do Trabalho, artigo 234.º: https://diariodarepublica.pt/dr/legislacao-consolidada/lei/2009-34546475-46746675"
+    },
+    {
+      "topic": "Referência — contagem procedimental",
+      "text": "CPA, artigo 87.º: https://diariodarepublica.pt/dr/detalhe/decreto-lei/4-2015-66041468-115721810"
+    }
+  ],
+  "gaps": [
+    {
+      "lead": "Grupo de Trabalho Nacional — macroalga Rugulopteryx okamurae",
+      "reason": "O artigo 5.º prevê a constituição de um grupo nacional sob coordenação da APA; a constituição efetiva não está demonstrada. Excluído dos totais confirmados.",
+      "next_step": "Localizar o ato de constituição ou designação da APA e a data efetiva de início."
+    },
+    {
+      "lead": "Grupos de trabalho — Estratégia Única dos Direitos das Crianças e Jovens",
+      "reason": "A disposição coletiva relativa a grupos em oito áreas estratégicas não estabelece uma lista verificada de entidades constituídas individualmente. Não se infere uma contagem.",
+      "next_step": "Obter o ato de constituição, o nome, os membros e a data de início de cada grupo."
+    },
+    {
+      "lead": "Grupos de trabalho — Estratégia para os Direitos das Pessoas com Deficiência",
+      "reason": "A disposição coletiva de governação abrange cinco áreas estratégicas e trabalho transversal; não estão verificados o número de grupos distintos nem as constituições efetivas.",
+      "next_step": "Obter as decisões da CTA e os registos individuais de constituição ou designação."
+    },
+    {
+      "lead": "Grupos técnicos temáticos no âmbito do CDAP",
+      "reason": "O quadro permite a criação de grupos técnicos temáticos, mas não identifica, por si só, todos os grupos posteriormente constituídos. As constituições relativas à EDN e às Raparigas STEM estão incluídas separadamente.",
+      "next_step": "Rever todas as atas do CDAP e decisões de designação; identificar grupos individuais em falta."
+    },
+    {
+      "lead": "Grupo de trabalho SAFE — despacho ministerial de 30 de junho de 2025",
+      "reason": "Um ato posterior do Diário da República e um anúncio oficial do Governo reconhecem um grupo criado por despacho ministerial. Não foi localizado o ato original de criação publicado no Diário da República.",
+      "next_step": "Solicitar ou obter o despacho ministerial original; depois, acrescentar uma linha principal com as fontes completas."
+    },
+    {
+      "lead": "Grupo de trabalho de polinizadores — trabalhos iniciados em junho de 2024",
+      "reason": "Um ato posterior relativo ao plano de ação reconhece trabalhos preparatórios anteriores; não foram verificados a criação original por um membro do Governo, a data nem a composição.",
+      "next_step": "Localizar a decisão original de constituição do ICNF ou do Governo e confirmar a sua inclusão no âmbito."
+    },
+    {
+      "lead": "Resposta pré-hospitalar na Península de Setúbal",
+      "reason": "Uma pista oficial parlamentar refere um grupo; não estão estabelecidos o ato original de criação pelo Governo nem a constituição exata.",
+      "next_step": "Obter a resposta ministerial e a decisão de constituição nela citada."
+    },
+    {
+      "lead": "Publicado a partir de 2 de abril, aprovado pelo XXIII Governo",
+      "reason": "A publicação, por si só, não torna um ato numa criação do XXIV Governo: a aprovação ou assinatura é anterior a 2 de abril de 2024. Excluído.",
+      "next_step": "Não é necessária outra diligência, salvo se um ato posterior constituir expressamente um novo grupo."
+    },
+    {
+      "lead": "Publicado a partir de 2 de abril, aprovado pelo XXIII Governo",
+      "reason": "A publicação, por si só, não torna um ato numa criação do XXIV Governo: a aprovação ou assinatura é anterior a 2 de abril de 2024. Excluído.",
+      "next_step": "Não é necessária outra diligência, salvo se um ato posterior constituir expressamente um novo grupo."
+    }
+  ],
+  "related": [
+    {
+      "notes": "Tipo de entidade distinto; excluída dos totais dos grupos de trabalho.",
+      "purpose": "Constituição de Comissão para a Revisão do Processo e Procedimento Tributário e das Garantias dos Contribuintes."
+    },
+    {
+      "notes": "Cria a comissão que enquadra grupos de trabalho clínicos posteriores; a comissão é registada separadamente.",
+      "purpose": "Cria a Comissão Nacional da Saúde da Mulher, da Criança e do Adolescente."
+    },
+    {
+      "notes": "Tipo de entidade distinto.",
+      "purpose": "Cria a Estrutura de Missão para a Comunicação Social."
+    },
+    {
+      "notes": "Mantida fora da tabela principal porque o ato de criação a designa como comissão de trabalho.",
+      "purpose": "Cria a comissão de trabalho prevista no n.º 3 da Resolução do Conselho de Ministros n.º 71/2024, de 5 de junho."
+    },
+    {
+      "notes": "Tipo de entidade distinto.",
+      "purpose": "Criação da comissão liquidatária das Administrações Regionais de Saúde, I. P."
+    },
+    {
+      "notes": "Podem ser criados grupos técnicos temáticos no âmbito da sua governação; as constituições individuais exigem verificação separada.",
+      "purpose": "Constitui o «Conselho para o Digital na Administração Pública»."
+    },
+    {
+      "notes": "Tipo de entidade distinto.",
+      "purpose": "Criação do Comité para a Eficiência, Inovação e Sustentabilidade (CEIS)."
+    },
+    {
+      "notes": "O ato usa a designação equipa de trabalho, não grupo de trabalho; é acompanhada separadamente.",
+      "purpose": "Determina a constituição de uma equipa de trabalho técnica e multissetorial com a missão de desenvolver um estudo técnico-estratégico para a substituição urgente do Sistema Integrado de Redes de Emergência e Segurança de Portugal (SIRESP)."
+    },
+    {
+      "notes": "Trata-se de uma alteração e ratificação que remete para o Despacho n.º 8171/2024 original, não de uma nova criação em 2025.",
+      "purpose": "Procede à ratificação e segunda alteração do Despacho n.º 8171/2024, de 23 de julho, que cria o Grupo de Acompanhamento para o processo de expansão da capacidade do Aeroporto Humberto Delgado, previsto na Resolução do Conselho de Ministros n.º 67/2024, de 27 de maio."
+    },
+    {
+      "notes": "Tipo de entidade distinto.",
+      "purpose": "Cria a Unidade de Combate à Fraude no Serviço Nacional de Saúde."
+    },
+    {
+      "notes": "Tipo de entidade distinto.",
+      "purpose": "Cria a comissão de acompanhamento da exposição «Camões na Biblioteca Nacional de Espanha», para assegurar a coordenação eficaz e integrada dos trabalhos da exposição, na parte respeitante a Portugal."
+    },
+    {
+      "notes": "Comissão e mecanismos de coordenação; excluídos da contagem principal dos grupos de trabalho.",
+      "purpose": "Aprova o modelo de governação do Plano Nacional da Saúde para as Demências, no quadro da Estratégia da Saúde na Área das Demências."
+    },
+    {
+      "notes": "Estrutura de governação sucessora de um grupo de trabalho SAFE oficialmente reconhecido cujo ato original de criação publicado não foi localizado.",
+      "purpose": "Cria a Estrutura de Missão denominada Estrutura Nacional SAFE."
+    },
+    {
+      "notes": "Distinta do GT-RN previsto no n.º 2; os seus membros não devem ser misturados com a composição do GT-RN.",
+      "purpose": "N.º 1: supervisionar a preparação do Plano Nacional de Restauro da Natureza."
+    },
+    {
+      "notes": "Distinta do GT-RN previsto no n.º 2; os seus membros não devem ser misturados com a composição do GT-RN.",
+      "purpose": "N.º 6: acompanhar o plano e apoiar a discussão temática."
+    }
+  ]
+}
