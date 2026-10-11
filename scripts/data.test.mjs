@@ -11,12 +11,13 @@ test('passport source, snapshot benchmark and preserved legal wording',()=>{cons
 test('accent-insensitive search and combined URL filters',()=>{assert.equal(fold('JUSTIÇA'),'justica');assert.equal(filterGroups(d.groups,{...emptyFilters,q:'passaporte'}).length,1);assert.deepEqual(filterGroups(d.groups,{...emptyFilters,q:'justica'}).map(g=>g.id),filterGroups(d.groups,{...emptyFilters,q:'justiça'}).map(g=>g.id));const f=readFilters(new URLSearchParams('government=XXV&status=Em+atraso&status=Sem+informa%C3%A7%C3%A3o+p%C3%BAblica'));assert.equal(filterGroups(d.groups,f).length,32);assert.equal(filterGroups(d.groups,{...emptyFilters,government:'XXIV'}).length,74);assert.equal(filterGroups(d.groups,{...emptyFilters,status:['Em atraso']}).length,60);assert.equal(filterGroups(d.groups,{...emptyFilters,month:'2024-12'}).length,6);assert.equal(filterGroups(d.groups,{...emptyFilters,q:'termoinexistenteabcdef'}).length,0)});
 test('CSV contains only filtered rows, escaped values and source columns',()=>{const groups=filterGroups(d.groups,{...emptyFilters,q:'passaporte'});const out=csv(groups);assert(out.startsWith('\uFEFF'));assert(out.includes('GT-2024-046'));assert(!out.includes('GT-2024-001'));assert(out.includes('https://diariodarepublica.pt/dr/detalhe/despacho/14284-2024-898695314'));assert(out.includes('2026-10-10'));assert(csv([{...groups[0],name:'Nome "citado"'}]).includes('Nome ""citado""'))});
 test('coverage distinction, immutable source workbook and translations',()=>{assert.equal(d.metrics.screened_urls,3251);assert.equal(d.metrics.monthly_allocated_urls,3142);assert.equal(d.sheets.Coverage.length,31);assert.equal(d.sheets['Act review'].length,292);assert.equal(d.sheets['Discovery gaps'].length,9);assert.equal(d.sheets['Related bodies'].length,15);const hash=p=>createHash('sha256').update(readFileSync(p)).digest('hex');assert.equal(hash('data/source.xlsx'),hash('public/fonte-original.xlsx'));assert.equal(hash('data/source.xlsx'),d.source.sha256)});
-test('built route files cover every group with source, title and legal text',()=>{if(!existsSync('dist/sitemap.xml'))return;d.groups.forEach(g=>{const h=readFileSync(`dist/grupos/${g.id}/index.html`,'utf8');assert(h.includes(g.id));assert(h.includes(g.url));assert(h.includes('<title>'));assert(h.includes('application/ld+json'));assert(h.includes('Missão e objetivos'))})});
+const requireBuild=()=>{if(!existsSync('dist/sitemap.xml'))throw new Error('dist/ em falta: correr "npm run build" antes de "npm test". Estes testes verificam o HTML servido e não podem passar sem ele.')};
+test('built route files cover every group with source, title and legal text',()=>{requireBuild();d.groups.forEach(g=>{const h=readFileSync(`dist/grupos/${g.id}/index.html`,'utf8');assert(h.includes(g.id));assert(h.includes(g.url));assert(h.includes('<title>'));assert(h.includes('application/ld+json'));assert(h.includes('Missão e objetivos'))})});
 
 test('deployment paths include the configured base and keep every route and download reachable',()=>{
- if(!existsSync('dist/sitemap.xml'))return;
+ requireBuild();
  const base=(process.env.SITE_BASE_PATH||'/').replace(/\/$/,'');
- const origin=(process.env.SITE_URL||'https://observatorio-grupos-de-trabalho.nina-and-tom-9604.chatgpt.site').replace(/\/$/,'');
+ const origin=(process.env.SITE_URL||'https://tomrodilh.github.io/Grupos-de-Trabalho-PT').replace(/\/$/,'');
  for(const route of ['', '/explorar','/grupos/GT-2024-046']){
   const h=readFileSync(`dist${route}/index.html`,'utf8');
   for(const [,url] of h.matchAll(/(?:href|src)="(\/(?!\/)[^"]*)"/g))assert(url.startsWith(base+'/'),`Wrong deployment path: ${url}`);
@@ -25,4 +26,79 @@ test('deployment paths include the configured base and keep every route and down
  }
  assert(readFileSync('dist/sitemap.xml','utf8').includes(origin+'/grupos/GT-2024-046'));
  assert(existsSync('dist/.nojekyll'));
+});
+
+
+/* Testes de regra. Os testes acima fixam o retrato — protegem contra deriva acidental,
+   mas passariam com qualquer número. Estes verificam que a classificação obedece à
+   regra declarada, e pinam as anomalias conhecidas do ficheiro de origem para que não
+   cresçam sem ser notadas. Não relaxar um destes para esconder uma divergência:
+   a divergência corrige-se em data/source.xlsx. */
+
+test('regra: «Em atraso» exige um prazo vencido e um atraso medido',()=>{
+ const overdue=d.groups.filter(g=>g.status==='Em atraso');
+ assert.equal(overdue.length,60);
+ for(const g of overdue){
+  assert.notEqual(g.delay_days,null,`${g.id}: Em atraso sem dias de atraso`);
+  assert(g.delay_days>=0,`${g.id}: atraso negativo`);
+  assert(g.deadline_current,`${g.id}: Em atraso sem prazo de referência`);
+  assert(g.deadline_current<d.cutoff,`${g.id}: prazo ainda não vencido ao corte`);
+ }
+});
+
+test('regra: um estado «Concluído» exige evidência de entrega',()=>{
+ for(const g of d.groups.filter(g=>g.status.startsWith('Concluído')))
+  assert(g.has_delivery_evidence,`${g.id}: concluído sem evidência de entrega`);
+});
+
+test('regra: nenhuma entrega é datada antes da publicação do ato',()=>{
+ for(const g of d.groups) if(g.delivery_date)
+  assert(g.delivery_date>=g.published,`${g.id}: entrega ${g.delivery_date} anterior à publicação ${g.published}`);
+});
+
+test('qualidade dos dados: anomalias conhecidas de data/source.xlsx, pinadas',()=>{
+ const published=Object.fromEntries(d.groups.map(g=>[g.id,g.published]));
+ const premature=d.deadlines.filter(x=>x.due&&published[x.group_id]&&x.due<published[x.group_id]);
+ // Prazos de entrega com data anterior ao ato que os cria: linhas da folha Deadlines que
+ // citam texto que não é uma obrigação de entrega (ex.: GT-2024-003-D01 cita uma alínea da
+ // composição). Corrigir no Excel fará este número descer — então baixar o valor aqui.
+ assert.equal(premature.length,7,'Prazos anteriores à publicação: corrigir no Excel, não relaxar o teste');
+ assert(premature.some(x=>x.id==='GT-2024-003-D01'));
+ // Entrega documentada sem estado «Concluído». Decisão editorial em aberto: ver PR de auditoria.
+ assert.equal(d.groups.filter(g=>g.has_delivery_evidence&&!g.status.startsWith('Concluído')).length,18);
+ assert.equal(d.metrics.delivery_evidence_total,20);
+});
+
+test('indicadores: cláusulas citadas e marcos calculados são contados em separado',()=>{
+ assert.equal(d.metrics.deadlines_quoted,330);
+ assert.equal(d.metrics.deadlines_benchmark,111);
+ assert.equal(d.metrics.deadlines_quoted+d.metrics.deadlines_benchmark,d.deadlines.length);
+ assert.equal(d.deadlines.filter(x=>x.wording_pt.trim()).length,d.metrics.deadlines_quoted);
+});
+
+test('o HTML servido está em português: rótulos de interface traduzidos',()=>{
+ requireBuild();
+ // O pré-renderizador e a aplicação React têm de usar os mesmos rótulos de core.ts.
+ // Se divergirem, o browser mostra português e os motores de busca veem inglês.
+ // Verifica-se a POSIÇÃO do rótulo, não a presença da expressão: a redação original
+ // do ficheiro de investigação é inglesa por opção e está assinalada como tal no texto.
+ const ENGLISH_KIND=/Tipo: (Deliverable|Status benchmark|Appointments? \/ planning|Periodic|Formal extension|Planning|Policy implementation|Acknowledged|Conditional|Contextual|Broader)/;
+ for(const g of d.groups){
+  const h=readFileSync(`dist/grupos/${g.id}/index.html`,'utf8');
+  const body=h.slice(h.indexOf('<body'));
+  assert(!ENGLISH_KIND.test(body),`${g.id}: tipo de prazo por traduzir no HTML servido`);
+  assert(!/Coordenação: Not specified/.test(body),`${g.id}: coordenação por traduzir`);
+  assert(!/— Mandate end</.test(body),`${g.id}: marco por traduzir`);
+  assert(!/<div class="legal">Not specified in/.test(body),`${g.id}: participação por traduzir`);
+ }
+});
+
+test('metadados de partilha: og:image absoluto e com dimensões',()=>{
+ requireBuild();
+ const h=readFileSync('dist/index.html','utf8');
+ const origin=(process.env.SITE_URL||'https://tomrodilh.github.io/Grupos-de-Trabalho-PT').replace(/\/$/,'');
+ assert(h.includes(`<meta property="og:image" content="${origin}/og-card.png"/>`),'og:image em falta ou relativo');
+ assert(h.includes('<meta property="og:image:width" content="1200"/>'));
+ assert(h.includes('<meta name="twitter:card" content="summary_large_image"/>'));
+ assert(existsSync('dist/og-card.png'),'og-card.png não foi publicado');
 });

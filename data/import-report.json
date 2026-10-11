@@ -23,7 +23,12 @@
     "months": 31,
     "monthly_allocated_urls": 3142,
     "screened_urls": 3251,
-    "reviewed_acts": 292
+    "reviewed_acts": 292,
+    "deadlines_quoted": 330,
+    "deadlines_benchmark": 111,
+    "delivery_evidence_total": 20,
+    "delivery_evidence_without_completed_status": 18,
+    "deadlines_dated_before_act_publication": 7
   },
   "validation": {
     "unique_ids": true,
@@ -46,5 +51,85 @@
       "Methodology": 5
     },
     "filename": "source.xlsx"
+  },
+  "data_quality": {
+    "deadlines_dated_before_act_publication": [
+      {
+        "deadline": "GT-2024-003-D01",
+        "group": "GT-2024-003",
+        "due": "2023-11-30",
+        "act_published": "2024-06-12",
+        "kind": "Deliverable / duration",
+        "wording": "h) Fernando Severino, licenciado em Medicina, assistente na área de medicina geral e familiar, em Viseu, até 30 de novembro de 2023;"
+      },
+      {
+        "deadline": "GT-2024-003-D02",
+        "group": "GT-2024-003",
+        "due": "2024-05-05",
+        "act_published": "2024-06-12",
+        "kind": "Deliverable / duration",
+        "wording": "6 - O grupo de trabalho deverá apresentar um relatório final que cumpra os objetivos mencionados no n.º 1, no prazo de 30 dias após a entrada em vigor do presente despacho."
+      },
+      {
+        "deadline": "GT-2024-003-D03",
+        "group": "GT-2024-003",
+        "due": "2024-05-05",
+        "act_published": "2024-06-12",
+        "kind": "Status benchmark",
+        "wording": ""
+      },
+      {
+        "deadline": "GT-2024-009-D04",
+        "group": "GT-2024-009",
+        "due": "2024-07-02",
+        "act_published": "2024-07-19",
+        "kind": "Appointments / planning",
+        "wording": "6 - Os membros do GT-EPBD são designados no prazo máximo de cinco dias após a data de entrada em vigor do presente despacho, podendo ser substituídos no decorrer dos trabalhos e a "
+      },
+      {
+        "deadline": "GT-2024-023-D02",
+        "group": "GT-2024-023",
+        "due": "2024-06-01",
+        "act_published": "2024-08-29",
+        "kind": "Deliverable / duration",
+        "wording": "10 - O presente despacho produz efeitos a 1 de junho de 2024 e vigorará pelo prazo de um ano, sem prejuízo da possibilidade de prorrogação dos seus efeitos."
+      },
+      {
+        "deadline": "GT-2025-006-D05",
+        "group": "GT-2025-006",
+        "due": "2025-01-30",
+        "act_published": "2025-01-31",
+        "kind": "Deliverable / duration",
+        "wording": "8 - O grupo de trabalho inicia funções a 30 de janeiro de 2025, devendo apresentar no prazo de 12 meses um relatório final com as propostas e recomendações, incluindo um plano de e"
+      },
+      {
+        "deadline": "GT-2025-007-D02",
+        "group": "GT-2025-007",
+        "due": "2025-01-23",
+        "act_published": "2025-02-03",
+        "kind": "Appointments / planning",
+        "wording": "6 - Os representantes das entidades referidas no n.º 4 devem ser designados no prazo máximo de 5 dias, após a data de entrada em vigor do presente despacho."
+      }
+    ],
+    "delivery_evidence_without_completed_status": [
+      "GT-2024-006",
+      "GT-2024-007",
+      "GT-2024-008",
+      "GT-2024-012",
+      "GT-2024-013",
+      "GT-2024-016",
+      "GT-2024-018",
+      "GT-2024-029",
+      "GT-2024-030",
+      "GT-2024-045",
+      "GT-2024-047",
+      "GT-2025-008",
+      "GT-2025-017",
+      "GT-2025-033",
+      "GT-2025-038",
+      "GT-2025-041",
+      "GT-2026-003",
+      "GT-2026-005"
+    ]
   }
 }

@@ -32,7 +32,7 @@ npm test
 npm run preview
 ```
 
-O build importa primeiro o Excel, verifica os tipos, compila a aplicação e gera o HTML das rotas. Os testes verificam os invariantes do retrato de 2026, as relações, ligações, pesquisa, filtros, CSV, integridade do Excel e páginas geradas. Para um novo retrato, atualizar os valores esperados dos testes após verificar as alterações nos dados; não ajustar os testes apenas para ocultar divergências.
+O build importa primeiro o Excel, verifica os tipos, compila a aplicação e gera o HTML das rotas. O cartão de partilha `public/og-card.png` é gerado à parte, com `python3 scripts/og-card.py`, e só precisa de ser refeito quando os números do corte mudam. Os testes verificam os invariantes do retrato de 2026, as relações, ligações, pesquisa, filtros, CSV, integridade do Excel e páginas geradas. Para um novo retrato, atualizar os valores esperados dos testes após verificar as alterações nos dados; não ajustar os testes apenas para ocultar divergências.
 
 ## Fonte e atualização dos dados
 
@@ -54,11 +54,13 @@ As datas do Excel são convertidas em ISO, os portefólios e prazos são unidos 
 
 O formulário de cada grupo prepara uma sugestão com ID, tipo, descrição, fonte oficial e contacto opcional. Os dados publicados nunca são alterados por visitantes.
 
-**Ainda não foi indicado um destinatário.** Nesta versão, o botão descarrega uma sugestão em texto ou copia-a; não afirma que foi enviada. Para ativar uma via de envio real, editar `data/site-config.json` com um endereço de receção ou o URL HTTPS da página `/issues` de um repositório GitHub controlado pelo projeto:
+As sugestões são dirigidas aos *issues* deste repositório, configurados em `data/site-config.json`:
 
 ```json
-{"feedbackEmail":"endereco-real-do-projeto","githubIssuesUrl":""}
+{"feedbackEmail":"","githubIssuesUrl":"https://github.com/tomrodilh/Grupos-de-Trabalho-PT/issues"}
 ```
+
+Sem destinatário configurado (ambos os campos vazios) o botão descarrega a sugestão em texto e di-lo explicitamente, em vez de fingir que a enviou.
 
 O email abre um rascunho no programa do visitante, que confirma o envio. Em GitHub, a ligação deve terminar em `/issues` no ficheiro de configuração; abre-se `/issues/new` com título e texto preenchidos, e o visitante confirma a publicação. O site não envia mensagens automaticamente, não conserva os contactos e não simula um backend. Preferir apenas um destino, rever o envio e reconstruir/publicar. Não configurar um endereço fictício.
 
@@ -91,7 +93,9 @@ A versão inicial em Sites tem publicação separada e não acompanha os commits
 
 ## Verificações e limites
 
-- 122 grupos, 74 XXIV / 48 XXV, 116 atos de criação e 441 registos de prazo.
+- 122 grupos, 74 XXIV / 48 XXV e 116 atos de criação.
+- 441 registos de prazo, dos quais **330 citam a redação de uma cláusula** do diploma e **111 são marcos de acompanhamento calculados** por esta investigação, sem texto correspondente no ato. Os dois números são publicados em separado; o contador da metodologia mostra apenas as cláusulas citadas.
+- Evidência de entrega identificada em **20** grupos. Apenas **2** têm estado «Concluído»: nos restantes **18** a entrega está documentada mas a data não é pública, pelo que a pontualidade não é classificável. **Entrega não comprovada e entrega não datada não são a mesma coisa** — ver `data/import-report.json`, bloco `data_quality`.
 - Sete estados: 1 no prazo, 1 com atraso, 18 em curso, 60 em atraso, 4 prorrogados, 2 extintos/substituídos e 36 sem informação pública.
 - Média de atraso entre os registos Em atraso: 375,2 dias; máximo: 888. São valores de acompanhamento ao corte de evidência, não atrasos comprovados de todos os relatórios.
 - Os portefólios sobrepõem-se. O gráfico de políticas usa a primeira área indicada e o detalhe conserva todas.
@@ -99,4 +103,14 @@ A versão inicial em Sites tem publicação separada e não acompanha os commits
 - O filtro de relatórios públicos usa afirmações explícitas do campo de evidência (não considera todo o URL PDF como relatório do grupo). Informação ausente não é prova de inexistência. Evidência parcial é identificada no texto.
 - As reservas de investigação e os cálculos originais em inglês são conservados e assinalados como tal; os resumos e a interface estão em pt-PT.
 - A acessibilidade foi apoiada por estrutura semântica, foco visível, etiquetas, contraste e redução de movimento, e por inspeção de desktop/telefone. Não equivale a certificação externa WCAG.
+- O importador regista em `data/import-report.json` (bloco `data_quality`) as anomalias que detecta no ficheiro de origem sem as corrigir em silêncio. Hoje há **7 prazos com data anterior à publicação do ato que os cria** — linhas da folha `Deadlines` que citam texto que não é uma obrigação de entrega, como a alínea da composição em `GT-2024-003-D01`. Corrigem-se em `data/source.xlsx`, não no código, e os testes pinam a contagem para que não cresça sem ser notada.
 - O registo não foi atualizado depois de 10 de outubro de 2026. As fontes externas podem mudar ou deixar de estar acessíveis.
+
+## Licença
+
+- **Código** (`src/`, `scripts/`, configuração, workflows): MIT. Ver [`LICENSE`](LICENSE).
+- **Dados** (ficheiro de investigação, JSON derivados, traduções, exportação CSV): CC BY 4.0. Ver [`LICENSE-DATA`](LICENSE-DATA).
+
+Ao reutilizar os dados, indicar a autoria e o corte de evidência. Os estados e os atrasos são um retrato datado e não se atualizam com a passagem do tempo.
+
+O texto dos diplomas é do Diário da República Eletrónico e segue o regime de reutilização da INCM; a licença acima cobre a compilação, a classificação e as anotações desta investigação.

@@ -1,0 +1,37 @@
+# Licença dos dados — CC BY 4.0
+
+Os dados desta investigação são disponibilizados ao abrigo da
+**Creative Commons Atribuição 4.0 Internacional (CC BY 4.0)**.
+
+Texto integral: https://creativecommons.org/licenses/by/4.0/legalcode.pt
+Resumo: https://creativecommons.org/licenses/by/4.0/deed.pt
+
+## A que se aplica
+
+- `data/source.xlsx` e `public/fonte-original.xlsx` — o ficheiro de investigação
+- `public/data.json` e `public/audit-completo.json` — dados derivados
+- `data/translations-*.json` e `data/transparency-pt.json` — camada editorial de tradução
+- a exportação CSV disponibilizada pelo explorador do site
+
+O código que processa e apresenta estes dados está sob licença MIT. Ver `LICENSE`.
+
+## O que pode fazer
+
+Copiar, redistribuir, adaptar e reutilizar os dados, para qualquer fim,
+incluindo comercial, desde que atribua a autoria.
+
+## Como atribuir
+
+> Observatório dos Grupos de Trabalho, de tomrodilh.
+> https://github.com/tomrodilh/Grupos-de-Trabalho-PT
+> Licenciado em CC BY 4.0. Corte de evidência: 2026-10-10.
+
+Ao reutilizar, indique o corte de evidência. Os estados e os atrasos são um
+retrato datado e não se atualizam com a passagem do tempo.
+
+## Fonte primária
+
+Os textos dos diplomas são do Diário da República Eletrónico
+(https://diariodarepublica.pt) e o seu regime de reutilização é o da INCM.
+Esta licença cobre a compilação, a classificação e as anotações desta
+investigação — não o texto legal original, que é documento público.

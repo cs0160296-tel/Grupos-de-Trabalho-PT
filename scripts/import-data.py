@@ -82,8 +82,19 @@ statuses=Counter(g['status'] for g in groups)
 expected=['Concluído no prazo','Concluído com atraso','Em curso – dentro do prazo','Em atraso','Prorrogado','Extinto / substituído','Sem informação pública']
 assert set(statuses)<=set(expected),'Unknown status'
 overdue=[g['delay_days'] for g in groups if g['status']=='Em atraso' and g['delay_days'] is not None]
+# Qualidade dos dados: anomalias do ficheiro de origem, registadas em vez de corrigidas em silêncio.
+# Um prazo de entrega não pode vencer antes de o ato que o cria ser publicado. Onde isso acontece,
+# a linha da folha Deadlines está a citar texto que não é uma obrigação de entrega (tipicamente uma
+# alínea da composição). Corrige-se no Excel, não aqui.
+published_by_group={g['id']:g['published'] for g in groups}
+premature_deadlines=[{'deadline':d['id'],'group':d['group_id'],'due':d['due'],'act_published':published_by_group.get(d['group_id']),'kind':d['kind'],'wording':d['wording_pt'][:180]}
+ for d in deadlines if d['due'] and published_by_group.get(d['group_id']) and d['due']<published_by_group[d['group_id']]]
+# Entrega documentada mas estado não concluído: diferença entre o que a investigação encontrou e o
+# que o painel publica. Ver PR de auditoria; a decisão de taxonomia é editorial.
+delivery_without_completed=[g['id'] for g in groups if g['has_delivery_evidence'] and not g['status'].startswith('Concluído')]
+data_quality={'deadlines_dated_before_act_publication':premature_deadlines,'delivery_evidence_without_completed_status':delivery_without_completed}
 coverage=[r['raw'] for r in sheets['Coverage']]
-metrics={'total':len(groups),'governments':dict(Counter(g['government'] for g in groups)),'statuses':{s:statuses[s] for s in expected},'creating_acts':len({g['url'] for g in groups}),'deadlines':len(deadlines),'average_delay':sum(overdue)/len(overdue) if overdue else None,'max_delay':max(overdue) if overdue else None,'no_information_percent':100*statuses['Sem informação pública']/len(groups),'months':len(coverage),'monthly_allocated_urls':sum(r['Distinct DR result URLs'] for r in coverage),'screened_urls':int(re.search(r'(\d+) distinct result URLs', next(r['raw']['Method / limitation'] for r in sheets['Methodology'] if r['raw']['Topic']=='Discovery search')).group(1)),'reviewed_acts':len(sheets['Act review'])}
+metrics={'total':len(groups),'governments':dict(Counter(g['government'] for g in groups)),'statuses':{s:statuses[s] for s in expected},'creating_acts':len({g['url'] for g in groups}),'deadlines':len(deadlines),'average_delay':sum(overdue)/len(overdue) if overdue else None,'max_delay':max(overdue) if overdue else None,'no_information_percent':100*statuses['Sem informação pública']/len(groups),'months':len(coverage),'monthly_allocated_urls':sum(r['Distinct DR result URLs'] for r in coverage),'screened_urls':int(re.search(r'(\d+) distinct result URLs', next(r['raw']['Method / limitation'] for r in sheets['Methodology'] if r['raw']['Topic']=='Discovery search')).group(1)),'reviewed_acts':len(sheets['Act review']),'deadlines_quoted':sum(1 for d in deadlines if d['wording_pt'].strip()),'deadlines_benchmark':sum(1 for d in deadlines if not d['wording_pt'].strip()),'delivery_evidence_total':sum(1 for g in groups if g['has_delivery_evidence']),'delivery_evidence_without_completed_status':len(delivery_without_completed),'deadlines_dated_before_act_publication':len(premature_deadlines)}
 # Validate the supplied historical workbook. Future dated workbooks use relational checks above.
 if cutoff=='2026-10-10':
  assert metrics['total']==122 and metrics['deadlines']==441
@@ -92,7 +103,11 @@ if cutoff=='2026-10-10':
  assert metrics['screened_urls']==3251 and metrics['reviewed_acts']==292 and metrics['months']==31
  assert metrics['statuses']==dict(zip(expected,[1,1,18,60,4,2,36]))
  assert next(g for g in groups if g['id']=='GT-2024-046')['delay_days']==102
-output={'cutoff':cutoff,'scope_start':'2024-04-02','groups':groups,'deadlines':deadlines,'sheets':sheets,'translations':aux,'metrics':metrics,'source':{'file':'fonte-original.xlsx','sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'header_rows':header_rows,'filename':source.name},'validation':{'unique_ids':True,'valid_sources':True,'referential_integrity':True,'translation_records':len(trans)}}
+ assert metrics['deadlines_quoted']==330 and metrics['deadlines_benchmark']==111,'Quoted/benchmark split changed'
+ assert metrics['delivery_evidence_total']==20,'Delivery-evidence count changed'
+ assert metrics['delivery_evidence_without_completed_status']==18,'Delivery/status gap changed'
+ assert metrics['deadlines_dated_before_act_publication']==7,'Premature-deadline count changed: fix data/source.xlsx, do not relax this'
+output={'cutoff':cutoff,'scope_start':'2024-04-02','groups':groups,'deadlines':deadlines,'sheets':sheets,'translations':aux,'metrics':metrics,'source':{'file':'fonte-original.xlsx','sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'header_rows':header_rows,'filename':source.name},'validation':{'unique_ids':True,'valid_sources':True,'referential_integrity':True,'translation_records':len(trans)},'data_quality':data_quality}
 (ROOT/'public').mkdir(exist_ok=True)
 output['dashboard_cells']=[[value(c.value) for c in row] for row in w['Dashboard'].iter_rows()]
 (ROOT/'public/audit-completo.json').write_text(json.dumps(output,ensure_ascii=False,separators=(',',':')))
@@ -102,6 +117,6 @@ lean['groups']=[{**g,'raw':None,'hyperlinks':None,'deadlines':[{k:v for k,v in d
 lean['deadlines']=[{k:v for k,v in d.items() if k!='raw'} for d in deadlines]
 (ROOT/'public/data.json').write_text(json.dumps(lean,ensure_ascii=False,separators=(',',':')))
 shutil.copyfile(source,ROOT/'public/fonte-original.xlsx')
-(ROOT/'data/import-report.json').write_text(json.dumps({'cutoff':cutoff,'metrics':metrics,'validation':output['validation'],'source':output['source']},ensure_ascii=False,indent=2))
+(ROOT/'data/import-report.json').write_text(json.dumps({'cutoff':cutoff,'metrics':metrics,'validation':output['validation'],'source':output['source'],'data_quality':data_quality},ensure_ascii=False,indent=2))
 if source != ROOT/'data/source.xlsx':shutil.copyfile(source,ROOT/'data/source.xlsx')
 print(json.dumps({'cutoff':cutoff,**metrics,'translated':sum('mission_pt' in g for g in groups),'translations_pending':sum(g.get('translation_pending',False) for g in groups)},ensure_ascii=False))

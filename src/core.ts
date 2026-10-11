@@ -7,7 +7,7 @@ export const statusInfo:Record<string,{color:string;explanation:string}>= {
  'Em atraso':{color:'overdue',explanation:'O prazo ou marco de acompanhamento passou e a pesquisa não encontrou confirmação pública da entrega. Isto não prova que os trabalhos não tenham sido entregues.'},
  'Prorrogado':{color:'extended',explanation:'Há uma prorrogação formal relevante. A data revista ou a falta de uma data determinável é indicada no registo.'},
  'Extinto / substituído':{color:'extinct',explanation:'Uma fonte oficial confirma a extinção ou substituição do grupo.'},
- 'Sem informação pública':{color:'unknown',explanation:'A entrega ou o seu cumprimento temporal não pode ser verificado: pode faltar um prazo, a data do início ou a data de receção, ou existir informação contraditória.'}
+ 'Sem informação pública':{color:'unknown',explanation:'A PONTUALIDADE não pode ser verificada: pode faltar um prazo, a data de início ou a data de receção, ou existir informação contraditória. Atenção: este estado NÃO significa que nada se sabe sobre o grupo — em parte destes registos a entrega está documentada em fonte oficial, mas sem data que permita classificar o cumprimento do prazo. Ver a metodologia.'}
 };
 export const number=(n:number,d=0)=>new Intl.NumberFormat('pt-PT',{maximumFractionDigits:d,minimumFractionDigits:d}).format(n);
 export const date=(x:string|null|undefined,full=false)=>x?new Intl.DateTimeFormat('pt-PT',{day:'numeric',month:full?'long':'short',year:'numeric',timeZone:'UTC'}).format(new Date(x+'T12:00:00Z')):'Não determinada';
@@ -18,6 +18,11 @@ const portfolioNames:Record<string,string>={'Presidency / Council of Ministers':
 export const portfolioLabel=(s:string)=>portfolioNames[s]||areaLabel(s);
 export const kindLabel=(s:string)=>({'Periodic / conditional':'Obrigação periódica ou condicional','Appointment / planning':'Designação ou planeamento','Appointments / planning':'Designação ou planeamento','Periodic':'Obrigação periódica','Periodic / mandate':'Reporte periódico ou mandato','Planning':'Planeamento','Acknowledged extension':'Prorrogação reconhecida em fonte posterior','Acknowledged later instruction':'Instrução posterior reconhecida','Conditional illustration':'Cálculo ilustrativo condicionado','Status benchmark':'Referência para o estado do grupo','Formal extension':'Prorrogação formal','Policy implementation window':'Janela de execução da política','Deliverable / duration':'Entrega ou duração','Contextual programme window':'Janela do programa — contexto','Broader act context':'Contexto do diploma'}[s]||s);
 export const paymentLabel=(s:string)=>({'unpaid':'Não remunerada','paid':'Remunerada','terms':'Condições específicas','unknown':'Não especificada'}[s]||s);
+/* Rótulos partilhados pela aplicação React e pelo pré-renderizador. Ambos têm de usar
+   estas funções: o HTML servido é o que os motores de busca e as pré-visualizações leem. */
+export const coordinatorLabel=(s:string)=>s.startsWith('Not specified')?'Não especificada na disposição de criação.':s;
+export const participationLabel=(s:string)=>s.startsWith('Not specified')?'Não especificada no ato de criação.':s;
+export const milestoneLabel=(kind:string,label:string)=>kind==='Status benchmark'?'Referência de acompanhamento do grupo':kind==='Formal extension'?'Prorrogação formal':label;
 export type Filters={q:string;government:string;status:string[];portfolio:string;area:string;from:string;to:string;dueFrom:string;dueTo:string;payment:string;evidence:string;extension:string;overdue:string;report:string;month:string};
 export const emptyFilters:Filters={q:'',government:'',status:[],portfolio:'',area:'',from:'',to:'',dueFrom:'',dueTo:'',payment:'',evidence:'',extension:'',overdue:'',report:'',month:''};
 export function readFilters(p:URLSearchParams):Filters{return {...emptyFilters,...Object.fromEntries(Object.keys(emptyFilters).filter(k=>k!=='status').map(k=>[k,p.get(k)||''])),status:p.getAll('status')};}

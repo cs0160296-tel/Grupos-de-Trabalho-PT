@@ -1,2 +1,6 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# A fonte de verdade é binária e o seu SHA-256 é validado nos testes.
+*.xlsx binary
+*.png binary
