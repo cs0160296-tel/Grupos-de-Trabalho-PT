@@ -7,7 +7,7 @@ export const statusInfo:Record<string,{color:string;explanation:string}>= {
  'Em atraso':{color:'overdue',explanation:'O prazo ou marco de acompanhamento passou e a pesquisa não encontrou confirmação pública da entrega. Isto não prova que os trabalhos não tenham sido entregues.'},
  'Prorrogado':{color:'extended',explanation:'Há uma prorrogação formal relevante. A data revista ou a falta de uma data determinável é indicada no registo.'},
  'Extinto / substituído':{color:'extinct',explanation:'Uma fonte oficial confirma a extinção ou substituição do grupo.'},
- 'Sem informação pública':{color:'unknown',explanation:'A entrega ou o seu cumprimento temporal não pode ser verificado: pode faltar um prazo, a data do início ou a data de receção, ou existir informação contraditória.'}
+ 'Sem informação pública':{color:'unknown',explanation:'A PONTUALIDADE não pode ser verificada: pode faltar um prazo, a data de início ou a data de receção, ou existir informação contraditória. Atenção: este estado NÃO significa que nada se sabe sobre o grupo — em parte destes registos a entrega está documentada em fonte oficial, mas sem data que permita classificar o cumprimento do prazo. Ver a metodologia.'}
 };
 export const number=(n:number,d=0)=>new Intl.NumberFormat('pt-PT',{maximumFractionDigits:d,minimumFractionDigits:d}).format(n);
 export const date=(x:string|null|undefined,full=false)=>x?new Intl.DateTimeFormat('pt-PT',{day:'numeric',month:full?'long':'short',year:'numeric',timeZone:'UTC'}).format(new Date(x+'T12:00:00Z')):'Não determinada';
