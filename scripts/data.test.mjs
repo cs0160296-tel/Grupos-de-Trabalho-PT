@@ -12,3 +12,17 @@ test('accent-insensitive search and combined URL filters',()=>{assert.equal(fold
 test('CSV contains only filtered rows, escaped values and source columns',()=>{const groups=filterGroups(d.groups,{...emptyFilters,q:'passaporte'});const out=csv(groups);assert(out.startsWith('\uFEFF'));assert(out.includes('GT-2024-046'));assert(!out.includes('GT-2024-001'));assert(out.includes('https://diariodarepublica.pt/dr/detalhe/despacho/14284-2024-898695314'));assert(out.includes('2026-10-10'));assert(csv([{...groups[0],name:'Nome "citado"'}]).includes('Nome ""citado""'))});
 test('coverage distinction, immutable source workbook and translations',()=>{assert.equal(d.metrics.screened_urls,3251);assert.equal(d.metrics.monthly_allocated_urls,3142);assert.equal(d.sheets.Coverage.length,31);assert.equal(d.sheets['Act review'].length,292);assert.equal(d.sheets['Discovery gaps'].length,9);assert.equal(d.sheets['Related bodies'].length,15);const hash=p=>createHash('sha256').update(readFileSync(p)).digest('hex');assert.equal(hash('data/source.xlsx'),hash('public/fonte-original.xlsx'));assert.equal(hash('data/source.xlsx'),d.source.sha256)});
 test('built route files cover every group with source, title and legal text',()=>{if(!existsSync('dist/sitemap.xml'))return;d.groups.forEach(g=>{const h=readFileSync(`dist/grupos/${g.id}/index.html`,'utf8');assert(h.includes(g.id));assert(h.includes(g.url));assert(h.includes('<title>'));assert(h.includes('application/ld+json'));assert(h.includes('Missão e objetivos'))})});
+
+test('deployment paths include the configured base and keep every route and download reachable',()=>{
+ if(!existsSync('dist/sitemap.xml'))return;
+ const base=(process.env.SITE_BASE_PATH||'/').replace(/\/$/,'');
+ const origin=(process.env.SITE_URL||'https://observatorio-grupos-de-trabalho.nina-and-tom-9604.chatgpt.site').replace(/\/$/,'');
+ for(const route of ['', '/explorar','/grupos/GT-2024-046']){
+  const h=readFileSync(`dist${route}/index.html`,'utf8');
+  for(const [,url] of h.matchAll(/(?:href|src)="(\/(?!\/)[^"]*)"/g))assert(url.startsWith(base+'/'),`Wrong deployment path: ${url}`);
+  assert(h.includes(`href="${base}/explorar"`));
+  assert(h.includes(`href="${origin}${route||'/'}"`));
+ }
+ assert(readFileSync('dist/sitemap.xml','utf8').includes(origin+'/grupos/GT-2024-046'));
+ assert(existsSync('dist/.nojekyll'));
+});

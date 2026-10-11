@@ -2,10 +2,12 @@
 import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 const data=JSON.parse(readFileSync('public/data.json','utf8'));
 const template=readFileSync('dist/index.html','utf8');
-const origin='https://observatorio-grupos-de-trabalho.nina-and-tom-9604.chatgpt.site';
+const origin=(process.env.SITE_URL||'https://observatorio-grupos-de-trabalho.nina-and-tom-9604.chatgpt.site').replace(/\/$/,'');
+const base=(process.env.SITE_BASE_PATH||'/').replace(/\/$/,'');
+const prefixLinks=html=>html.replace(/href="\/(?!\/)([^"]*)"/g,(_,path)=>`href="${base}/${path}"`);
 const e=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const source=u=>`<a href="${e(u)}" rel="noopener noreferrer">Verificar fonte oficial</a>`;
-const wrap=content=>`<a class="skip" href="#conteudo">Saltar para o conteúdo</a><header class="site-header"><a href="/" class="brand">Observatório dos Grupos de Trabalho</a><nav aria-label="Navegação principal"><a href="/">Panorama</a><a href="/explorar">Explorar grupos</a><a href="/metodologia">Metodologia</a><a href="/lacunas">Lacunas</a></nav></header><main id="conteudo">${content}</main><footer>Iniciativa independente. Evidência revista até ${e(data.cutoff)}. Inventário público, não um censo certificado.</footer>`;
+const wrap=content=>prefixLinks(`<a class="skip" href="#conteudo">Saltar para o conteúdo</a><header class="site-header"><a href="/" class="brand">Observatório dos Grupos de Trabalho</a><nav aria-label="Navegação principal"><a href="/">Panorama</a><a href="/explorar">Explorar grupos</a><a href="/metodologia">Metodologia</a><a href="/lacunas">Lacunas</a></nav></header><main id="conteudo">${content}</main><footer>Iniciativa independente. Evidência revista até ${e(data.cutoff)}. Inventário público, não um censo certificado.</footer>`);
 const jsonScript=x=>JSON.stringify(x).replace(/</g,'\\u003c');
 const routes=[];
 function page(path,title,description,content,structured){let html=template.replace(/<title>.*?<\/title>/,`<title>${e(title)} | Observatório dos Grupos de Trabalho</title>`).replace(/<meta name="description"[^>]*\/>/,`<meta name="description" content="${e(description)}"/>`);html=html.replace('</head>',`<link rel="canonical" href="${origin}${path}"/><meta property="og:title" content="${e(title)}"/><meta property="og:description" content="${e(description)}"/><meta property="og:type" content="website"/><meta property="og:url" content="${origin}${path}"/>${structured?`<script type="application/ld+json">${jsonScript(structured)}</script>`:''}</head>`).replace('<div id="root"></div>',`<div id="root">${wrap(content)}</div><noscript><p class="notice">O conteúdo está disponível nesta página. Ative JavaScript para pesquisar, filtrar e usar os gráficos interativos.</p></noscript>`);let file=path==='/'?'dist/index.html':`dist${path}/index.html`;mkdirSync(file.slice(0,file.lastIndexOf('/')),{recursive:true});writeFileSync(file,html);routes.push(path);}
@@ -18,6 +20,7 @@ page('/lacunas','Lacunas da pesquisa','Sete pistas por confirmar e duas exclusõ
 page('/outras-estruturas','Outras estruturas','Comissões, estruturas de missão e equipas excluídas das estatísticas principais.',`<div class="page"><h1>Comissões e outras estruturas</h1>${data.sheets['Related bodies'].map((r,i)=>`<section><h2>${e(r.raw['Body name · Português'])}</h2><p>${e(data.translations.related[i]?.purpose)}</p>${source(r.raw['DR URL'])}</section>`).join('')}</div>`);
 page('/sobre','Sobre o projeto','Iniciativa independente e não partidária de escrutínio público.',`<div class="page"><h1>Tornar o trabalho do Governo mais visível</h1><p>Iniciativa independente de interesse público, sem afiliação ao Governo ou a partidos políticos. Inventário de registos públicos entre 2 de abril de 2024 e ${e(data.cutoff)}, não um censo certificado.</p><p>Não encontrar evidência pública não prova que os trabalhos não tenham sido entregues.</p><a href="/metodologia">Metodologia</a></div>`);
 writeFileSync('dist/sitemap.xml',`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.map(p=>`<url><loc>${origin}${p}</loc><lastmod>${data.cutoff}</lastmod></url>`).join('')}</urlset>`);
+writeFileSync('dist/.nojekyll','');
 writeFileSync('dist/robots.txt',`User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`);
 writeFileSync('data/route-manifest.json',JSON.stringify(routes,null,2));
 console.log(`Rendered ${routes.length} indexable routes, including ${data.groups.length} group pages.`);

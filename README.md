@@ -2,7 +2,9 @@
 
 Iniciativa independente de transparência, em português europeu. Inventário de registos públicos de grupos constituídos pelo Governo português entre 2 de abril de 2024 e 10 de outubro de 2026. Não é um site oficial nem um censo certificado.
 
-Site publicado: https://observatorio-grupos-de-trabalho.nina-and-tom-9604.chatgpt.site
+Site com publicação automática: https://tomrodilh.github.io/Grupos-de-Trabalho-PT/
+
+Versão inicial em Sites: https://observatorio-grupos-de-trabalho.nina-and-tom-9604.chatgpt.site
 
 ## Conteúdo e aplicação
 
@@ -60,11 +62,32 @@ O formulário de cada grupo prepara uma sugestão com ID, tipo, descrição, fon
 
 O email abre um rascunho no programa do visitante, que confirma o envio. Em GitHub, a ligação deve terminar em `/issues` no ficheiro de configuração; abre-se `/issues/new` com título e texto preenchidos, e o visitante confirma a publicação. O site não envia mensagens automaticamente, não conserva os contactos e não simula um backend. Preferir apenas um destino, rever o envio e reconstruir/publicar. Não configurar um endereço fictício.
 
-## Publicação
+## Trabalhar em conjunto e publicar
 
-A pasta `dist/` é o resultado estático completo. Pode ser publicada em Sites, Netlify, Vercel ou qualquer alojamento HTTPS de ficheiros estáticos. Configurar a resolução de caminhos para os ficheiros `index.html` das pastas (por exemplo `/grupos/GT-2024-046/index.html`) e a página 404; o router suporta navegação no cliente. Os dados e downloads usam caminhos absolutos, pelo que a implantação deve estar na raiz do domínio.
+Repositório: https://github.com/tomrodilh/Grupos-de-Trabalho-PT
 
-Para outro domínio, alterar `origin` em `scripts/prerender.mjs` antes do build; os URLs canónicos e sitemap seguem esse valor. Em Sites, preservar `.openai/hosting.json` e o seu `project_id`; sincronizar e guardar o commit exato antes de publicar. Nenhuma credencial de alojamento acompanha este projeto.
+O proprietário é `tomrodilh`. Os colaboradores convidados podem editar os ficheiros, enviar alterações e abrir pedidos de revisão depois de aceitarem o convite do GitHub. O acesso à edição fica no GitHub; os visitantes do site continuam a ter apenas acesso de leitura.
+
+### Alterações pequenas, diretamente no browser
+
+1. Abrir o ficheiro no GitHub e escolher o lápis (Edit this file). Premir `.` no repositório também abre o editor github.dev.
+2. Editar e escolher **Commit changes**. Para revisão conjunta, escolher uma nova branch e abrir um pull request; depois da revisão, fazer Merge.
+3. Qualquer commit em `main` inicia **Actions → Check and publish website**. Só um build com verificações aprovadas publica a nova versão. Consultar a execução para confirmar que terminou com sucesso.
+4. Abrir https://tomrodilh.github.io/Grupos-de-Trabalho-PT/ depois da publicação. Não há necessidade de carregar manualmente `dist/` ou `node_modules/`.
+
+Para textos e layout, editar `src/home.tsx`, `src/pages.tsx` e `src/styles.css`. O Excel em `data/source.xlsx` continua a ser a fonte dos dados investigados; editar os JSON públicos gerados não é uma forma persistente de alterar os dados. Para dados, seguir o procedimento de atualização acima, rever fontes e traduções, e atualizar os testes apenas depois de verificar o novo retrato.
+
+### GitHub Desktop
+
+No computador do Diogo, escolher **File → Clone repository → URL**, indicar o URL do repositório e escolher uma pasta local. Usar Fetch/Pull antes de começar; criar uma branch, editar, Commit, Push e abrir um pull request. O Diogo precisa de aceitar o convite e iniciar sessão na conta GitHub dele.
+
+### Alojamento
+
+O workflow `.github/workflows/publish.yml` instala Node e Python, importa o Excel, constrói as 128 páginas e executa os testes. Commits em `main` publicam no GitHub Pages; pull requests executam as verificações sem publicar. O workflow utiliza a autenticação temporária do GitHub; não requer chaves de API pessoais.
+
+Em **Settings → Pages → Build and deployment → Source**, selecionar **GitHub Actions**. Os caminhos da aplicação, ficheiros e HTML pré-gerado suportam o prefixo `/Grupos-de-Trabalho-PT/`. O build local usa a raiz `/` por omissão. Para outro alojamento, definir `SITE_BASE_PATH` e `SITE_URL` antes do build. A pasta `dist/` é o resultado completo; as rotas têm o seu próprio `index.html`.
+
+A versão inicial em Sites tem publicação separada e não acompanha os commits de GitHub automaticamente. O URL de GitHub Pages é o endereço para o trabalho colaborativo e a publicação automática.
 
 ## Verificações e limites
 
