@@ -2,7 +2,7 @@
 
 Iniciativa independente de transparência, em português europeu. Inventário de registos públicos de grupos constituídos pelo Governo português entre 2 de abril de 2024 e 10 de outubro de 2026. Não é um site oficial nem um censo certificado.
 
-Site com publicação automática: https://tomrodilh.github.io/Grupos-de-Trabalho-PT/
+Site com publicação automática: https://cs0160296-tel.github.io/Grupos-de-Trabalho-PT/
 
 Versão inicial em Sites: https://observatorio-grupos-de-trabalho.nina-and-tom-9604.chatgpt.site
 
@@ -57,7 +57,7 @@ O formulário de cada grupo prepara uma sugestão com ID, tipo, descrição, fon
 As sugestões são dirigidas aos *issues* deste repositório, configurados em `data/site-config.json`:
 
 ```json
-{"feedbackEmail":"","githubIssuesUrl":"https://github.com/tomrodilh/Grupos-de-Trabalho-PT/issues"}
+{"feedbackEmail":"","githubIssuesUrl":"https://github.com/cs0160296-tel/Grupos-de-Trabalho-PT/issues"}
 ```
 
 Sem destinatário configurado (ambos os campos vazios) o botão descarrega a sugestão em texto e di-lo explicitamente, em vez de fingir que a enviou.
@@ -66,16 +66,16 @@ O email abre um rascunho no programa do visitante, que confirma o envio. Em GitH
 
 ## Trabalhar em conjunto e publicar
 
-Repositório: https://github.com/tomrodilh/Grupos-de-Trabalho-PT
+Repositório: https://github.com/cs0160296-tel/Grupos-de-Trabalho-PT
 
-O proprietário é `tomrodilh`. Os colaboradores convidados podem editar os ficheiros, enviar alterações e abrir pedidos de revisão depois de aceitarem o convite do GitHub. O acesso à edição fica no GitHub; os visitantes do site continuam a ter apenas acesso de leitura.
+O proprietário é `cs0160296-tel`. Os colaboradores convidados podem editar os ficheiros, enviar alterações e abrir pedidos de revisão depois de aceitarem o convite do GitHub. O acesso à edição fica no GitHub; os visitantes do site continuam a ter apenas acesso de leitura.
 
 ### Alterações pequenas, diretamente no browser
 
 1. Abrir o ficheiro no GitHub e escolher o lápis (Edit this file). Premir `.` no repositório também abre o editor github.dev.
 2. Editar e escolher **Commit changes**. Para revisão conjunta, escolher uma nova branch e abrir um pull request; depois da revisão, fazer Merge.
 3. Qualquer commit em `main` inicia **Actions → Check and publish website**. Só um build com verificações aprovadas publica a nova versão. Consultar a execução para confirmar que terminou com sucesso.
-4. Abrir https://tomrodilh.github.io/Grupos-de-Trabalho-PT/ depois da publicação. Não há necessidade de carregar manualmente `dist/` ou `node_modules/`.
+4. Abrir https://cs0160296-tel.github.io/Grupos-de-Trabalho-PT/ depois da publicação. Não há necessidade de carregar manualmente `dist/` ou `node_modules/`.
 
 Para textos e layout, editar `src/home.tsx`, `src/pages.tsx` e `src/styles.css`. O Excel em `data/source.xlsx` continua a ser a fonte dos dados investigados; editar os JSON públicos gerados não é uma forma persistente de alterar os dados. Para dados, seguir o procedimento de atualização acima, rever fontes e traduções, e atualizar os testes apenas depois de verificar o novo retrato.
 
