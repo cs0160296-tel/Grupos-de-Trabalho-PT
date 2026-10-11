@@ -61,11 +61,6 @@ Sem destinatário configurado (ambos os campos vazios) o botão descarrega a sug
 
 O email abre um rascunho no programa do visitante, que confirma o envio. Em GitHub, a ligação deve terminar em `/issues` no ficheiro de configuração; abre-se `/issues/new` com título e texto preenchidos, e o visitante confirma a publicação. O site não envia mensagens automaticamente, não conserva os contactos e não simula um backend. Preferir apenas um destino, rever o envio e reconstruir/publicar. Não configurar um endereço fictício.
 
-## Trabalhar em conjunto e publicar
-
-Repositório: https://github.com/tomrodilh/Grupos-de-Trabalho-PT
-
-O proprietário é `tomrodilh`. Os colaboradores convidados podem editar os ficheiros, enviar alterações e abrir pedidos de revisão depois de aceitarem o convite do GitHub. O acesso à edição fica no GitHub; os visitantes do site continuam a ter apenas acesso de leitura.
 
 ### Alterações pequenas, diretamente no browser
 
