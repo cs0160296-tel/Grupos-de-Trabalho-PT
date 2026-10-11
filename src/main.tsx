@@ -16,7 +16,7 @@ function App(){const [data,setData]=useState<Dataset|null>(null),[error,setError
  const path=loc.pathname.replace(/\/+$/,'')||'/';
  if(path==='/explorar')sessionStorage.setItem('explorer-url',path+loc.search);
  let title='Observatório dos Grupos de Trabalho';
- if(path.startsWith('/grupos/'))title=(data?.groups.find(g=>g.id===path.split('/')[2])?.name||'Grupo de trabalho')+' | Observatório';
+ if(path.startsWith('/grupos/'))title=(data?.groups.find(g=>g.id===path.split('/')[2])?.display_name||'Grupo de trabalho')+' | Observatório';
  else if(path!=='/')title=({'/explorar':'Explorar grupos de trabalho','/metodologia':'Metodologia','/lacunas':'Lacunas da pesquisa','/outras-estruturas':'Outras estruturas','/sobre':'Sobre o projeto'}[path]||'Página')+' | Observatório';
  document.title=title;
 },[loc,data]);

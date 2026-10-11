@@ -27,7 +27,7 @@ export type Filters={q:string;government:string;status:string[];portfolio:string
 export const emptyFilters:Filters={q:'',government:'',status:[],portfolio:'',area:'',from:'',to:'',dueFrom:'',dueTo:'',payment:'',evidence:'',extension:'',overdue:'',report:'',month:''};
 export function readFilters(p:URLSearchParams):Filters{return {...emptyFilters,...Object.fromEntries(Object.keys(emptyFilters).filter(k=>k!=='status').map(k=>[k,p.get(k)||''])),status:p.getAll('status')};}
 export function filterGroups(groups:Group[],f:Filters){return groups.filter(g=>{
- if(f.q&&!fold([g.id,g.name,g.act,g.issuer,g.coordinator,g.members,g.mission_pt,g.mission_en,g.objective_pt,g.specific_objectives,...g.portfolios.map(portfolioLabel)].join(' ')).includes(fold(f.q)))return false;
+ if(f.q&&!fold([g.id,g.display_name,g.name,g.act,g.issuer,g.coordinator,g.members,g.mission_pt,g.mission_en,g.objective_pt,g.specific_objectives,...g.portfolios.map(portfolioLabel)].join(' ')).includes(fold(f.q)))return false;
  if(f.government&&g.government!==f.government)return false;
  if(f.status.length&&!f.status.includes(g.status))return false;
  if(f.portfolio&&!g.portfolios.includes(f.portfolio))return false;
@@ -44,6 +44,6 @@ export function filterGroups(groups:Group[],f:Filters){return groups.filter(g=>{
  if(f.report&&g.report_public!==(f.report==='yes'))return false;
  return true;
 });}
-export function csv(groups:Group[]){const headers=['ID','Grupo de trabalho','Governo','Áreas governativas','Área de política pública','Publicação','Prazo original','Prazo atual','Estado','Dias de atraso','Data de revisão','Diploma','URL Diário da República','Missão','Evidência do estado','Entrega dos trabalhos','Implementação das medidas'];return '\uFEFF'+[headers,...groups.map(g=>[g.id,g.name,g.government,g.portfolios.map(portfolioLabel).join('; '),areaLabel(g.area),g.published,g.deadline_original,g.deadline_current,g.status,g.delay_days,g.last_checked,g.act,g.url,g.mission_pt,g.status_explanation_pt,g.delivery_pt,g.policy_pt])].map(row=>row.map(x=>'"'+String(x??'').replace(/"/g,'""')+'"').join(';')).join('\r\n');}
+export function csv(groups:Group[]){const headers=['ID','Grupo de trabalho','Designação no diploma','Governo','Áreas governativas','Área de política pública','Publicação','Prazo original','Prazo atual','Estado','Dias de atraso','Data de revisão','Diploma','URL Diário da República','Missão','Evidência do estado','Entrega dos trabalhos','Implementação das medidas'];return '\uFEFF'+[headers,...groups.map(g=>[g.id,g.display_name,g.name,g.government,g.portfolios.map(portfolioLabel).join('; '),areaLabel(g.area),g.published,g.deadline_original,g.deadline_current,g.status,g.delay_days,g.last_checked,g.act,g.url,g.mission_pt,g.status_explanation_pt,g.delivery_pt,g.policy_pt])].map(row=>row.map(x=>'"'+String(x??'').replace(/"/g,'""')+'"').join(';')).join('\r\n');}
 export const groupUrl=(id:string)=>'/grupos/'+id;
 export const extractUrls=(text:string)=>Array.from(new Set(text.match(/https?:\/\/[^\s<>]+/g)||[]));
