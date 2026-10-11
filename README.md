@@ -2,9 +2,6 @@
 
 Iniciativa independente de transparência, em português europeu. Inventário de registos públicos de grupos constituídos pelo Governo português entre 2 de abril de 2024 e 10 de outubro de 2026. Não é um site oficial nem um censo certificado.
 
-Site com publicação automática: https://cs0160296-tel.github.io/Grupos-de-Trabalho-PT/
-
-Versão inicial em Sites: https://observatorio-grupos-de-trabalho.nina-and-tom-9604.chatgpt.site
 
 ## Conteúdo e aplicação
 
@@ -64,11 +61,6 @@ Sem destinatário configurado (ambos os campos vazios) o botão descarrega a sug
 
 O email abre um rascunho no programa do visitante, que confirma o envio. Em GitHub, a ligação deve terminar em `/issues` no ficheiro de configuração; abre-se `/issues/new` com título e texto preenchidos, e o visitante confirma a publicação. O site não envia mensagens automaticamente, não conserva os contactos e não simula um backend. Preferir apenas um destino, rever o envio e reconstruir/publicar. Não configurar um endereço fictício.
 
-## Trabalhar em conjunto e publicar
-
-Repositório: https://github.com/cs0160296-tel/Grupos-de-Trabalho-PT
-
-O proprietário é `cs0160296-tel`. Os colaboradores convidados podem editar os ficheiros, enviar alterações e abrir pedidos de revisão depois de aceitarem o convite do GitHub. O acesso à edição fica no GitHub; os visitantes do site continuam a ter apenas acesso de leitura.
 
 ### Alterações pequenas, diretamente no browser
 
