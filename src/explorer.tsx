@@ -15,7 +15,7 @@ export function Explorer({data}:{data:Dataset}){
  const update=(key:string,value:string)=>{const p=new URLSearchParams(params);if(value)p.set(key,value);else p.delete(key);p.delete('page');setParams(p,{replace:true});};
  const toggleStatus=(s:string)=>{const p=new URLSearchParams(params);const selected=f.status.includes(s)?f.status.filter(x=>x!==s):[...f.status,s];p.delete('status');selected.forEach(x=>p.append('status',x));p.delete('page');setParams(p,{replace:true});};
  const columns=useMemo<ColumnDef<Group>[]>(()=>[
-  {accessorKey:'name',header:'Grupo de trabalho',cell:({row})=><Link className="group-name" to={groupUrl(row.original.id)}><span>{row.original.name}</span><small>{row.original.id}</small></Link>},
+  {accessorKey:'display_name',header:'Grupo de trabalho',cell:({row})=><Link className="group-name" to={groupUrl(row.original.id)}><span>{row.original.display_name}</span><small>{row.original.id}</small></Link>},
   {accessorKey:'government',header:'Governo',cell:({getValue})=><span className="mono">{getValue<string>()}</span>},
   {id:'portfolios',accessorFn:g=>g.portfolios.map(portfolioLabel).join('; '),header:'Área governativa'},
   {id:'area',accessorFn:g=>areaLabel(g.area),header:'Política pública'},

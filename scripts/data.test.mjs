@@ -9,15 +9,15 @@ test('historical snapshot counts and status categories reconcile',()=>{assert.eq
 test('IDs, all deadlines, source URLs and one-to-many joins',()=>{const ids=new Set(d.groups.map(g=>g.id));assert.equal(ids.size,122);assert.equal(d.deadlines.length,441);assert.equal(new Set(d.deadlines.map(x=>x.id)).size,441);assert.equal(d.groups.reduce((s,g)=>s+g.deadlines.length,0),441);d.deadlines.forEach(x=>{assert(ids.has(x.group_id));assert(x.source_url.startsWith('https://'))});d.groups.forEach(g=>{assert(g.url.startsWith('https://diariodarepublica.pt/'));assert(g.portfolios.length);assert.equal(new Set(g.portfolios).size,g.portfolios.length);assert(g.mission_pt);assert(g.status_explanation_pt)});assert.equal(Object.keys(audit.sheets).length,9);assert(audit.dashboard_cells.length);assert.equal(audit.sheets.Groups.length,122);assert.equal(audit.sheets.Deadlines.length,441)});
 test('passport source, snapshot benchmark and preserved legal wording',()=>{const g=d.groups.find(g=>g.id==='GT-2024-046');assert.equal(g.delay_days,102);assert.equal(g.deadline_current,'2026-06-30');assert.equal(g.url,'https://diariodarepublica.pt/dr/detalhe/despacho/14284-2024-898695314');assert(g.deadlines.some(x=>x.due==='2025-01-16'));assert(g.objective_pt.includes('passaporte'));assert(g.policy_pt.includes('cinco'));assert.equal(g.last_checked,'2026-10-10')});
 test('accent-insensitive search and combined URL filters',()=>{assert.equal(fold('JUSTIÇA'),'justica');assert.equal(filterGroups(d.groups,{...emptyFilters,q:'passaporte'}).length,1);assert.deepEqual(filterGroups(d.groups,{...emptyFilters,q:'justica'}).map(g=>g.id),filterGroups(d.groups,{...emptyFilters,q:'justiça'}).map(g=>g.id));const f=readFilters(new URLSearchParams('government=XXV&status=Em+atraso&status=Sem+informa%C3%A7%C3%A3o+p%C3%BAblica'));assert.equal(filterGroups(d.groups,f).length,32);assert.equal(filterGroups(d.groups,{...emptyFilters,government:'XXIV'}).length,74);assert.equal(filterGroups(d.groups,{...emptyFilters,status:['Em atraso']}).length,60);assert.equal(filterGroups(d.groups,{...emptyFilters,month:'2024-12'}).length,6);assert.equal(filterGroups(d.groups,{...emptyFilters,q:'termoinexistenteabcdef'}).length,0)});
-test('CSV contains only filtered rows, escaped values and source columns',()=>{const groups=filterGroups(d.groups,{...emptyFilters,q:'passaporte'});const out=csv(groups);assert(out.startsWith('\uFEFF'));assert(out.includes('GT-2024-046'));assert(!out.includes('GT-2024-001'));assert(out.includes('https://diariodarepublica.pt/dr/detalhe/despacho/14284-2024-898695314'));assert(out.includes('2026-10-10'));assert(csv([{...groups[0],name:'Nome "citado"'}]).includes('Nome ""citado""'))});
+test('CSV contains only filtered rows, escaped values and source columns',()=>{const groups=filterGroups(d.groups,{...emptyFilters,q:'passaporte'});const out=csv(groups);assert(out.startsWith('\uFEFF'));assert(out.includes('GT-2024-046'));assert(out.includes('Designação no diploma'));assert(!out.includes('GT-2024-001'));assert(out.includes('https://diariodarepublica.pt/dr/detalhe/despacho/14284-2024-898695314'));assert(out.includes('2026-10-10'));assert(csv([{...groups[0],name:'Nome "citado"'}]).includes('Nome ""citado""'))});
 test('coverage distinction, immutable source workbook and translations',()=>{assert.equal(d.metrics.screened_urls,3251);assert.equal(d.metrics.monthly_allocated_urls,3142);assert.equal(d.sheets.Coverage.length,31);assert.equal(d.sheets['Act review'].length,292);assert.equal(d.sheets['Discovery gaps'].length,9);assert.equal(d.sheets['Related bodies'].length,15);const hash=p=>createHash('sha256').update(readFileSync(p)).digest('hex');assert.equal(hash('data/source.xlsx'),hash('public/fonte-original.xlsx'));assert.equal(hash('data/source.xlsx'),d.source.sha256)});
 const requireBuild=()=>{if(!existsSync('dist/sitemap.xml'))throw new Error('dist/ em falta: correr "npm run build" antes de "npm test". Estes testes verificam o HTML servido e não podem passar sem ele.')};
-test('built route files cover every group with source, title and legal text',()=>{requireBuild();d.groups.forEach(g=>{const h=readFileSync(`dist/grupos/${g.id}/index.html`,'utf8');assert(h.includes(g.id));assert(h.includes(g.url));assert(h.includes('<title>'));assert(h.includes('application/ld+json'));assert(h.includes('Missão e objetivos'))})});
+test('built route files cover every group with source, title and legal text',()=>{requireBuild();d.groups.forEach(g=>{const h=readFileSync(`dist/grupos/${g.id}/index.html`,'utf8');assert(h.includes(g.id));assert(h.includes(g.url));assert(h.includes('<title>'));assert(h.includes('application/ld+json'));assert(h.includes('Missão e objetivos'));assert(h.includes(g.display_name))})});
 
 test('deployment paths include the configured base and keep every route and download reachable',()=>{
  requireBuild();
  const base=(process.env.SITE_BASE_PATH||'/').replace(/\/$/,'');
- const origin=(process.env.SITE_URL||'https://tomrodilh.github.io/Grupos-de-Trabalho-PT').replace(/\/$/,'');
+ const origin=(process.env.SITE_URL||'https://cs0160296-tel.github.io/Grupos-de-Trabalho-PT').replace(/\/$/,'');
  for(const route of ['', '/explorar','/grupos/GT-2024-046']){
   const h=readFileSync(`dist${route}/index.html`,'utf8');
   for(const [,url] of h.matchAll(/(?:href|src)="(\/(?!\/)[^"]*)"/g))assert(url.startsWith(base+'/'),`Wrong deployment path: ${url}`);
@@ -96,9 +96,34 @@ test('o HTML servido está em português: rótulos de interface traduzidos',()=>
 test('metadados de partilha: og:image absoluto e com dimensões',()=>{
  requireBuild();
  const h=readFileSync('dist/index.html','utf8');
- const origin=(process.env.SITE_URL||'https://tomrodilh.github.io/Grupos-de-Trabalho-PT').replace(/\/$/,'');
+ const origin=(process.env.SITE_URL||'https://cs0160296-tel.github.io/Grupos-de-Trabalho-PT').replace(/\/$/,'');
  assert(h.includes(`<meta property="og:image" content="${origin}/og-card.png"/>`),'og:image em falta ou relativo');
  assert(h.includes('<meta property="og:image:width" content="1200"/>'));
  assert(h.includes('<meta name="twitter:card" content="summary_large_image"/>'));
  assert(existsSync('dist/og-card.png'),'og-card.png não foi publicado');
+});
+
+
+test('nomes de apresentação: todos normalizados, únicos e usados no HTML servido',()=>{
+ assert.equal(d.groups.length,122);
+ for(const g of d.groups){
+  assert(g.display_name.startsWith('Grupo de Trabalho para'),`${g.id}: nome sem o prefixo normalizado`);
+  assert(g.display_name.length<=95,`${g.id}: nome demasiado longo para uma linha`);
+  assert(g.name,`${g.id}: designação do diploma perdida`);
+ }
+ assert.equal(new Set(d.groups.map(g=>g.display_name)).size,122,'Nomes de apresentação duplicados');
+});
+
+test('páginas de grupo: simplificadas e sem blocos em inglês',()=>{
+ requireBuild();
+ // Os cartões de registo original eram integralmente em inglês e foram removidos da
+ // interface. O registo completo mantém-se em public/audit-completo.json.
+ const removidos=[/Base do prazo e qualificações/,/Notas sobre a designação/,/Disposições numeradas/,/Notas de investigação/,/Pesquisas realizadas/,/Cálculo e qualificação/];
+ for(const g of d.groups){
+  const h=readFileSync(`dist/grupos/${g.id}/index.html`,'utf8');
+  const body=h.slice(h.indexOf('<body'));
+  assert(body.includes(g.display_name),`${g.id}: título normalizado ausente`);
+  assert(body.includes('Designação no diploma'),`${g.id}: designação oficial deixou de estar visível`);
+  for(const rx of removidos) assert(!rx.test(body),`${g.id}: bloco «${rx.source}» ainda presente`);
+ }
 });
