@@ -2,9 +2,6 @@
 
 Iniciativa independente de transparência, em português europeu. Inventário de registos públicos de grupos constituídos pelo Governo português entre 2 de abril de 2024 e 10 de outubro de 2026. Não é um site oficial nem um censo certificado.
 
-Site com publicação automática: https://tomrodilh.github.io/Grupos-de-Trabalho-PT/
-
-Versão inicial em Sites: https://observatorio-grupos-de-trabalho.nina-and-tom-9604.chatgpt.site
 
 ## Conteúdo e aplicação
 
