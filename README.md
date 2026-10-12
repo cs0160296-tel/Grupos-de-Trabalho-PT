@@ -86,10 +86,12 @@ A versão inicial em Sites tem publicação separada e não acompanha os commits
 ## Verificações e limites
 
 - 122 grupos, 74 XXIV / 48 XXV e 116 atos de criação.
+- **Segunda ronda de verificação (12 de outubro de 2026).** Os 36 grupos classificados «Sem informação pública» no retrato de 10 de outubro foram reexaminados: 191 elementos de evidência, 169 prazos reanalisados, 372 pesquisas registadas. Sete mudaram de estado e em 17 foi identificado um resultado público atribuível ao grupo. A revisão é aplicada por `data/revisao-auditoria-2026-10-12.json`, **por cima** do Excel e nunca dentro dele; apagar o ficheiro reverte-a por completo. Cada alteração — campo, valor anterior, valor novo e motivo — fica registada em `data/import-report.json`, no bloco `revisao_auditoria`.
+- Os atrasos da revisão foram recalculados até 10 de outubro de 2026, o corte de evidência do conjunto, para que a coluna continue comparável. O relatório de auditoria media-os até 11 de outubro e dois valores estavam um dia acima da sua própria fundamentação.
 - 441 registos de prazo, dos quais **330 citam a redação de uma cláusula** do diploma e **111 são marcos de acompanhamento calculados** por esta investigação, sem texto correspondente no ato. Os dois números são publicados em separado; o contador da metodologia mostra apenas as cláusulas citadas.
 - Evidência de entrega identificada em **20** grupos. Apenas **2** têm estado «Concluído»: nos restantes **18** a entrega está documentada mas a data não é pública, pelo que a pontualidade não é classificável. **Entrega não comprovada e entrega não datada não são a mesma coisa** — ver `data/import-report.json`, bloco `data_quality`.
-- Sete estados: 1 no prazo, 1 com atraso, 18 em curso, 60 em atraso, 4 prorrogados, 2 extintos/substituídos e 36 sem informação pública.
-- Média de atraso entre os registos Em atraso: 375,2 dias; máximo: 888. São valores de acompanhamento ao corte de evidência, não atrasos comprovados de todos os relatórios.
+- Sete estados, depois da revisão: 2 no prazo, 2 com atraso, 20 em curso, 62 em atraso, 4 prorrogados, 3 extintos/substituídos e 29 sem informação pública. Antes da revisão eram 1 / 1 / 18 / 60 / 4 / 2 / 36.
+- Média de atraso entre os registos Em atraso: 369,7 dias; máximo: 888. São valores de acompanhamento ao corte de evidência, não atrasos comprovados de todos os relatórios.
 - Os portefólios sobrepõem-se. O gráfico de políticas usa a primeira área indicada e o detalhe conserva todas.
 - O ficheiro refere 3.251 URLs globais, mas a cobertura mensal soma 3.142. A diferença de 109 está explicitada na interface; não se inventou uma repartição.
 - O filtro de relatórios públicos usa afirmações explícitas do campo de evidência (não considera todo o URL PDF como relatório do grupo). Informação ausente não é prova de inexistência. Evidência parcial é identificada no texto.

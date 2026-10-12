@@ -7,28 +7,31 @@
       "XXV": 48
     },
     "statuses": {
-      "Concluído no prazo": 1,
-      "Concluído com atraso": 1,
-      "Em curso – dentro do prazo": 18,
-      "Em atraso": 60,
+      "Concluído no prazo": 2,
+      "Concluído com atraso": 2,
+      "Em curso – dentro do prazo": 20,
+      "Em atraso": 62,
       "Prorrogado": 4,
-      "Extinto / substituído": 2,
-      "Sem informação pública": 36
+      "Extinto / substituído": 3,
+      "Sem informação pública": 29
     },
     "creating_acts": 116,
     "deadlines": 441,
-    "average_delay": 375.2,
+    "average_delay": 369.7096774193548,
     "max_delay": 888,
-    "no_information_percent": 29.508196721311474,
+    "no_information_percent": 23.770491803278688,
     "months": 31,
     "monthly_allocated_urls": 3142,
     "screened_urls": 3251,
     "reviewed_acts": 292,
     "deadlines_quoted": 330,
     "deadlines_benchmark": 111,
-    "delivery_evidence_total": 20,
-    "delivery_evidence_without_completed_status": 18,
-    "deadlines_dated_before_act_publication": 7
+    "delivery_evidence_total": 25,
+    "delivery_evidence_without_completed_status": 21,
+    "deadlines_dated_before_act_publication": 7,
+    "audit_reviewed": 36,
+    "audit_status_changes": 7,
+    "audit_output_urls": 17
   },
   "validation": {
     "unique_ids": true,
@@ -112,24 +115,265 @@
       }
     ],
     "delivery_evidence_without_completed_status": [
+      "GT-2024-001",
       "GT-2024-006",
-      "GT-2024-007",
       "GT-2024-008",
+      "GT-2024-010",
       "GT-2024-012",
       "GT-2024-013",
+      "GT-2024-014",
       "GT-2024-016",
       "GT-2024-018",
-      "GT-2024-029",
+      "GT-2024-028",
       "GT-2024-030",
       "GT-2024-045",
       "GT-2024-047",
       "GT-2025-008",
+      "GT-2025-010",
       "GT-2025-017",
       "GT-2025-033",
       "GT-2025-038",
       "GT-2025-041",
       "GT-2026-003",
       "GT-2026-005"
+    ]
+  },
+  "revisao_auditoria": {
+    "data": "2026-10-12",
+    "inicio_da_investigacao": "2026-10-11",
+    "ambito": "Os 36 grupos com estado «Sem informação pública» no corte de evidência de 2026-10-10.",
+    "ficheiro_de_entrada_sha256": "dd862694de41ce85c7f3be200b01cb1932fa6a12bd7d7c40d1f2b93ab9149e01",
+    "evidencias": 191,
+    "prazos_analisados": 169,
+    "pesquisas_registadas": 372,
+    "referencia_do_atraso": "2026-10-10",
+    "nota_sobre_o_atraso": "O relatório mede os atrasos até 11 de outubro de 2026, a data da investigação. Aqui são recalculados até 2026-10-10, o corte de evidência do conjunto, para que a coluna continue comparável com os restantes registos. Dois valores do relatório estavam também um dia acima da sua própria fundamentação: GT-2025-014 indicava 285 dias sobre uma base de 284, e GT-2025-037 indicava 129 sobre uma base de 128.",
+    "limites": "Nenhum responsável foi contactado. Registos internos e algumas fontes públicas não estavam acessíveis. Uma pesquisa sem resultados não prova a ausência de entrega.",
+    "alteracoes": [
+      {
+        "group": "GT-2024-001",
+        "field": "has_delivery_evidence",
+        "from": false,
+        "to": true,
+        "reason": "Resultado público identificado pela auditoria"
+      },
+      {
+        "group": "GT-2024-006",
+        "field": "deadline_current",
+        "from": null,
+        "to": "2024-07-31",
+        "reason": "Prazo reavaliado sobre o texto do ato"
+      },
+      {
+        "group": "GT-2024-007",
+        "field": "status",
+        "from": "Sem informação pública",
+        "to": "Concluído no prazo",
+        "reason": "Revisão de 2026-10-12"
+      },
+      {
+        "group": "GT-2024-007",
+        "field": "delay_days",
+        "from": null,
+        "to": 0,
+        "reason": "Recalculado até ao corte de evidência"
+      },
+      {
+        "group": "GT-2024-007",
+        "field": "delivery_date",
+        "from": null,
+        "to": "2024-09-30",
+        "reason": ""
+      },
+      {
+        "group": "GT-2024-008",
+        "field": "deadline_current",
+        "from": "2024-12-19",
+        "to": null,
+        "reason": "Prazo reavaliado sobre o texto do ato"
+      },
+      {
+        "group": "GT-2024-010",
+        "field": "deadline_current",
+        "from": null,
+        "to": "2024-09-30",
+        "reason": "Prazo reavaliado sobre o texto do ato"
+      },
+      {
+        "group": "GT-2024-010",
+        "field": "has_delivery_evidence",
+        "from": false,
+        "to": true,
+        "reason": "Resultado público identificado pela auditoria"
+      },
+      {
+        "group": "GT-2024-014",
+        "field": "has_delivery_evidence",
+        "from": false,
+        "to": true,
+        "reason": "Resultado público identificado pela auditoria"
+      },
+      {
+        "group": "GT-2024-028",
+        "field": "has_delivery_evidence",
+        "from": false,
+        "to": true,
+        "reason": "Resultado público identificado pela auditoria"
+      },
+      {
+        "group": "GT-2024-029",
+        "field": "status",
+        "from": "Sem informação pública",
+        "to": "Concluído com atraso",
+        "reason": "Revisão de 2026-10-12"
+      },
+      {
+        "group": "GT-2024-030",
+        "field": "deadline_current",
+        "from": "2024-12-31",
+        "to": null,
+        "reason": "Prazo reavaliado sobre o texto do ato"
+      },
+      {
+        "group": "GT-2025-004",
+        "field": "deadline_current",
+        "from": "2025-04-21",
+        "to": null,
+        "reason": "Prazo reavaliado sobre o texto do ato"
+      },
+      {
+        "group": "GT-2025-010",
+        "field": "has_delivery_evidence",
+        "from": false,
+        "to": true,
+        "reason": "Resultado público identificado pela auditoria"
+      },
+      {
+        "group": "GT-2025-014",
+        "field": "status",
+        "from": "Sem informação pública",
+        "to": "Em atraso",
+        "reason": "Revisão de 2026-10-12"
+      },
+      {
+        "group": "GT-2025-014",
+        "field": "delay_days",
+        "from": null,
+        "to": 283,
+        "reason": "Recalculado até ao corte de evidência"
+      },
+      {
+        "group": "GT-2025-014",
+        "field": "deadline_current",
+        "from": null,
+        "to": "2025-12-31",
+        "reason": "Prazo reavaliado sobre o texto do ato"
+      },
+      {
+        "group": "GT-2025-017",
+        "field": "deadline_current",
+        "from": "2025-09-29",
+        "to": null,
+        "reason": "Prazo reavaliado sobre o texto do ato"
+      },
+      {
+        "group": "GT-2025-025",
+        "field": "deadline_current",
+        "from": "2025-09-13",
+        "to": null,
+        "reason": "Prazo reavaliado sobre o texto do ato"
+      },
+      {
+        "group": "GT-2025-037",
+        "field": "status",
+        "from": "Sem informação pública",
+        "to": "Em atraso",
+        "reason": "Revisão de 2026-10-12"
+      },
+      {
+        "group": "GT-2025-037",
+        "field": "delay_days",
+        "from": null,
+        "to": 127,
+        "reason": "Recalculado até ao corte de evidência"
+      },
+      {
+        "group": "GT-2025-037",
+        "field": "deadline_current",
+        "from": null,
+        "to": "2026-06-05",
+        "reason": "Prazo reavaliado sobre o texto do ato"
+      },
+      {
+        "group": "GT-2025-039",
+        "field": "status",
+        "from": "Sem informação pública",
+        "to": "Extinto / substituído",
+        "reason": "Revisão de 2026-10-12"
+      },
+      {
+        "group": "GT-2025-041",
+        "field": "deadline_current",
+        "from": "2025-12-31",
+        "to": null,
+        "reason": "Prazo reavaliado sobre o texto do ato"
+      },
+      {
+        "group": "GT-2026-005",
+        "field": "deadline_current",
+        "from": null,
+        "to": "2026-03-31",
+        "reason": "Prazo reavaliado sobre o texto do ato"
+      },
+      {
+        "group": "GT-2026-016",
+        "field": "status",
+        "from": "Sem informação pública",
+        "to": "Em curso – dentro do prazo",
+        "reason": "Revisão de 2026-10-12"
+      },
+      {
+        "group": "GT-2026-016",
+        "field": "deadline_current",
+        "from": null,
+        "to": "2026-12-31",
+        "reason": "Prazo reavaliado sobre o texto do ato"
+      },
+      {
+        "group": "GT-2026-017",
+        "field": "deadline_current",
+        "from": "2026-09-15",
+        "to": null,
+        "reason": "Prazo reavaliado sobre o texto do ato"
+      },
+      {
+        "group": "GT-2026-018",
+        "field": "status",
+        "from": "Sem informação pública",
+        "to": "Em curso – dentro do prazo",
+        "reason": "Revisão de 2026-10-12"
+      },
+      {
+        "group": "GT-2026-018",
+        "field": "deadline_current",
+        "from": "2026-09-15",
+        "to": "2026-11-27",
+        "reason": "Prazo reavaliado sobre o texto do ato"
+      },
+      {
+        "group": "GT-2026-019",
+        "field": "deadline_current",
+        "from": "2026-09-15",
+        "to": null,
+        "reason": "Prazo reavaliado sobre o texto do ato"
+      },
+      {
+        "group": "GT-2026-020",
+        "field": "deadline_current",
+        "from": "2026-09-16",
+        "to": null,
+        "reason": "Prazo reavaliado sobre o texto do ato"
+      }
     ]
   }
 }
