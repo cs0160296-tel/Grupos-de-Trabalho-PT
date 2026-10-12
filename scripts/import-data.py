@@ -45,6 +45,14 @@ for f in ['translations-a.json','translations-b.json']:
 # Nomes de apresentação. O nome da folha Groups é o sumário do DR: longo e por vezes
 # truncado. Estes nomes servem a navegação; a designação oficial fica visível na página.
 short_names=json.loads((ROOT/'data/nomes-curtos.json').read_text())
+# Segunda ronda de verificação (12-10-2026) sobre os grupos «Sem informação pública».
+# Aplicada por cima do Excel, nunca dentro dele. Cada alteração fica registada no
+# relatório de importação. Apagar o ficheiro reverte a revisão por completo.
+revision_path=ROOT/'data/revisao-auditoria-2026-10-12.json'
+revision=json.loads(revision_path.read_text()) if revision_path.exists() else {'auditoria':{},'grupos':{}}
+revision_groups=revision.get('grupos',{})
+audit_meta=revision.get('auditoria',{})
+audit_ledger=[]
 aux_path=ROOT/'data/transparency-pt.json'
 aux=json.loads(aux_path.read_text()) if aux_path.exists() else {}
 portfolio={}
@@ -63,6 +71,34 @@ for r in sheets['Groups']:
  fingerprint=hashlib.sha256('\n'.join(g[k] for k in ['mission_en','status_explanation','delivery_evidence','policy_outcome']).encode()).hexdigest()
  if fingerprints.get(gid)==fingerprint:g.update(trans.get(gid,{}))
  else:g['translation_pending']=True
+ rev=revision_groups.get(gid)
+ if rev:
+  g['audit_reviewed']=True
+  g['audit_date']=audit_meta.get('data')
+  g['audit_note_pt']=rev.get('nota_pt','')
+  def _log(field,old,new,why=''):
+   if old!=new: audit_ledger.append({'group':gid,'field':field,'from':old,'to':new,'reason':why})
+  if 'estado' in rev:
+   _log('status',g['status'],rev['estado'],'Revisão de 2026-10-12')
+   g['status']=rev['estado']
+  if 'atraso_dias' in rev:
+   _log('delay_days',g['delay_days'],rev['atraso_dias'],'Recalculado até ao corte de evidência')
+   g['delay_days']=rev['atraso_dias']
+  if 'prazo_aplicavel' in rev:
+   _log('deadline_current',g['deadline_current'],rev['prazo_aplicavel'],'Prazo reavaliado sobre o texto do ato')
+   g['deadline_current']=rev['prazo_aplicavel']
+  if rev.get('data_entrega'):
+   _log('delivery_date',g['delivery_date'],rev['data_entrega'])
+   g['delivery_date']=rev['data_entrega']
+  if rev.get('explicacao_pt'):
+   g['status_explanation_pt']=rev['explicacao_pt']
+  if rev.get('resultado_url'):
+   u=rev['resultado_url']
+   if u not in g['evidence_urls']:g['evidence_urls']=g['evidence_urls']+[u]
+   g['audit_output_url']=u
+   if not g['has_delivery_evidence']:
+    _log('has_delivery_evidence',False,True,'Resultado público identificado pela auditoria')
+    g['has_delivery_evidence']=True
  groups.append(g)
 ids=[g['id'] for g in groups];idset=set(ids)
 assert len(ids)==len(idset),'Duplicate group IDs'
@@ -101,20 +137,26 @@ premature_deadlines=[{'deadline':d['id'],'group':d['group_id'],'due':d['due'],'a
 delivery_without_completed=[g['id'] for g in groups if g['has_delivery_evidence'] and not g['status'].startswith('Concluído')]
 data_quality={'deadlines_dated_before_act_publication':premature_deadlines,'delivery_evidence_without_completed_status':delivery_without_completed}
 coverage=[r['raw'] for r in sheets['Coverage']]
-metrics={'total':len(groups),'governments':dict(Counter(g['government'] for g in groups)),'statuses':{s:statuses[s] for s in expected},'creating_acts':len({g['url'] for g in groups}),'deadlines':len(deadlines),'average_delay':sum(overdue)/len(overdue) if overdue else None,'max_delay':max(overdue) if overdue else None,'no_information_percent':100*statuses['Sem informação pública']/len(groups),'months':len(coverage),'monthly_allocated_urls':sum(r['Distinct DR result URLs'] for r in coverage),'screened_urls':int(re.search(r'(\d+) distinct result URLs', next(r['raw']['Method / limitation'] for r in sheets['Methodology'] if r['raw']['Topic']=='Discovery search')).group(1)),'reviewed_acts':len(sheets['Act review']),'deadlines_quoted':sum(1 for d in deadlines if d['wording_pt'].strip()),'deadlines_benchmark':sum(1 for d in deadlines if not d['wording_pt'].strip()),'delivery_evidence_total':sum(1 for g in groups if g['has_delivery_evidence']),'delivery_evidence_without_completed_status':len(delivery_without_completed),'deadlines_dated_before_act_publication':len(premature_deadlines)}
+metrics={'total':len(groups),'governments':dict(Counter(g['government'] for g in groups)),'statuses':{s:statuses[s] for s in expected},'creating_acts':len({g['url'] for g in groups}),'deadlines':len(deadlines),'average_delay':sum(overdue)/len(overdue) if overdue else None,'max_delay':max(overdue) if overdue else None,'no_information_percent':100*statuses['Sem informação pública']/len(groups),'months':len(coverage),'monthly_allocated_urls':sum(r['Distinct DR result URLs'] for r in coverage),'screened_urls':int(re.search(r'(\d+) distinct result URLs', next(r['raw']['Method / limitation'] for r in sheets['Methodology'] if r['raw']['Topic']=='Discovery search')).group(1)),'reviewed_acts':len(sheets['Act review']),'deadlines_quoted':sum(1 for d in deadlines if d['wording_pt'].strip()),'deadlines_benchmark':sum(1 for d in deadlines if not d['wording_pt'].strip()),'delivery_evidence_total':sum(1 for g in groups if g['has_delivery_evidence']),'delivery_evidence_without_completed_status':len(delivery_without_completed),'deadlines_dated_before_act_publication':len(premature_deadlines),'audit_reviewed':sum(1 for g in groups if g.get('audit_reviewed')),'audit_status_changes':sum(1 for e in audit_ledger if e['field']=='status'),'audit_output_urls':sum(1 for g in groups if g.get('audit_output_url'))}
 # Validate the supplied historical workbook. Future dated workbooks use relational checks above.
 if cutoff=='2026-10-10':
  assert metrics['total']==122 and metrics['deadlines']==441
  assert metrics['governments']=={'XXIV':74,'XXV':48}
  assert metrics['creating_acts']==116
  assert metrics['screened_urls']==3251 and metrics['reviewed_acts']==292 and metrics['months']==31
- assert metrics['statuses']==dict(zip(expected,[1,1,18,60,4,2,36]))
+ # Retrato de 2026-10-10 revisto pela auditoria de 2026-10-12 sobre os 36 grupos
+ # «Sem informação pública». Antes da revisão: [1,1,18,60,4,2,36]. Sete grupos mudaram
+ # de estado com base em evidência documentada; ver data/revisao-auditoria-2026-10-12.json
+ # e o registo `revisao_auditoria` em data/import-report.json.
+ assert metrics['statuses']==dict(zip(expected,[2,2,20,62,4,3,29]))
+ assert metrics['audit_reviewed']==36 and metrics['audit_status_changes']==7
+ assert metrics['audit_output_urls']==17
  assert next(g for g in groups if g['id']=='GT-2024-046')['delay_days']==102
  assert metrics['deadlines_quoted']==330 and metrics['deadlines_benchmark']==111,'Quoted/benchmark split changed'
- assert metrics['delivery_evidence_total']==20,'Delivery-evidence count changed'
- assert metrics['delivery_evidence_without_completed_status']==18,'Delivery/status gap changed'
+ assert metrics['delivery_evidence_total']==25,'Delivery-evidence count changed'
+ assert metrics['delivery_evidence_without_completed_status']==21,'Delivery/status gap changed'
  assert metrics['deadlines_dated_before_act_publication']==7,'Premature-deadline count changed: fix data/source.xlsx, do not relax this'
-output={'cutoff':cutoff,'scope_start':'2024-04-02','groups':groups,'deadlines':deadlines,'sheets':sheets,'translations':aux,'metrics':metrics,'source':{'file':'fonte-original.xlsx','sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'header_rows':header_rows,'filename':source.name},'validation':{'unique_ids':True,'valid_sources':True,'referential_integrity':True,'translation_records':len(trans)},'data_quality':data_quality}
+output={'cutoff':cutoff,'scope_start':'2024-04-02','groups':groups,'deadlines':deadlines,'sheets':sheets,'translations':aux,'metrics':metrics,'source':{'file':'fonte-original.xlsx','sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'header_rows':header_rows,'filename':source.name},'validation':{'unique_ids':True,'valid_sources':True,'referential_integrity':True,'translation_records':len(trans)},'data_quality':data_quality,'revisao_auditoria':{**audit_meta,'alteracoes':audit_ledger}}
 (ROOT/'public').mkdir(exist_ok=True)
 output['dashboard_cells']=[[value(c.value) for c in row] for row in w['Dashboard'].iter_rows()]
 (ROOT/'public/audit-completo.json').write_text(json.dumps(output,ensure_ascii=False,separators=(',',':')))
@@ -124,6 +166,6 @@ lean['groups']=[{**g,'raw':None,'hyperlinks':None,'deadlines':[{k:v for k,v in d
 lean['deadlines']=[{k:v for k,v in d.items() if k!='raw'} for d in deadlines]
 (ROOT/'public/data.json').write_text(json.dumps(lean,ensure_ascii=False,separators=(',',':')))
 shutil.copyfile(source,ROOT/'public/fonte-original.xlsx')
-(ROOT/'data/import-report.json').write_text(json.dumps({'cutoff':cutoff,'metrics':metrics,'validation':output['validation'],'source':output['source'],'data_quality':data_quality},ensure_ascii=False,indent=2))
+(ROOT/'data/import-report.json').write_text(json.dumps({'cutoff':cutoff,'metrics':metrics,'validation':output['validation'],'source':output['source'],'data_quality':data_quality,'revisao_auditoria':{**audit_meta,'alteracoes':audit_ledger}},ensure_ascii=False,indent=2))
 if source != ROOT/'data/source.xlsx':shutil.copyfile(source,ROOT/'data/source.xlsx')
 print(json.dumps({'cutoff':cutoff,**metrics,'translated':sum('mission_pt' in g for g in groups),'translations_pending':sum(g.get('translation_pending',False) for g in groups)},ensure_ascii=False))

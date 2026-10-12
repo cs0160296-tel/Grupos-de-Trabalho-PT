@@ -1,0 +1,186 @@
+{
+  "_nota": "Segunda ronda de verificação, de 12 de outubro de 2026, sobre os 36 grupos que o retrato de 2026-10-10 classificava como «Sem informação pública». Esta camada NÃO substitui data/source.xlsx: o importador lê o Excel e aplica estas revisões por cima, registando cada uma em data/import-report.json. Para reverter, basta apagar o ficheiro. Os textos em português são editoriais, escritos a partir do relatório de auditoria, que está em inglês.",
+
+  "auditoria": {
+    "data": "2026-10-12",
+    "inicio_da_investigacao": "2026-10-11",
+    "ambito": "Os 36 grupos com estado «Sem informação pública» no corte de evidência de 2026-10-10.",
+    "ficheiro_de_entrada_sha256": "dd862694de41ce85c7f3be200b01cb1932fa6a12bd7d7c40d1f2b93ab9149e01",
+    "evidencias": 191,
+    "prazos_analisados": 169,
+    "pesquisas_registadas": 372,
+    "referencia_do_atraso": "2026-10-10",
+    "nota_sobre_o_atraso": "O relatório mede os atrasos até 11 de outubro de 2026, a data da investigação. Aqui são recalculados até 2026-10-10, o corte de evidência do conjunto, para que a coluna continue comparável com os restantes registos. Dois valores do relatório estavam também um dia acima da sua própria fundamentação: GT-2025-014 indicava 285 dias sobre uma base de 284, e GT-2025-037 indicava 129 sobre uma base de 128.",
+    "limites": "Nenhum responsável foi contactado. Registos internos e algumas fontes públicas não estavam acessíveis. Uma pesquisa sem resultados não prova a ausência de entrega."
+  },
+
+  "grupos": {
+    "GT-2024-001": {
+      "resultado_url": "https://www.imt-ip.pt/wp-content/uploads/2025/12/Sumario-Executivo.pdf",
+      "nota_pt": "A auditoria localizou um sumário executivo público do IMT com o resultado da análise. Mantém-se por apurar o relatório completo, a data de entrega e os termos do prazo."
+    },
+    "GT-2024-004": {
+      "nota_pt": "A auditoria reexaminou o caso e não localizou aprovações clínicas datadas, atas de consenso nem registo de formação. O estado mantém-se."
+    },
+    "GT-2024-006": {
+      "prazo_aplicavel": "2024-07-31",
+      "resultado_url": "https://www.solidariedade.pt/UserFiles/files/Compromisso%20de%20Coopera%C3%A7%C3%A3o%20para%20o%20Setor%20Social%20e%20Solid%C3%A1rio%202025-2026.pdf",
+      "nota_pt": "A auditoria fixou o prazo em 31 de julho de 2024 e identificou o Compromisso de Cooperação 2025-2026 como aplicação pública da fórmula. Falta a data de apresentação do estudo e a identificação do coordenador eleito."
+    },
+    "GT-2024-007": {
+      "estado": "Concluído no prazo",
+      "atraso_dias": 0,
+      "prazo_aplicavel": "2024-09-30",
+      "data_entrega": "2024-09-30",
+      "resultado_url": "https://portugal.gov.pt/api/media/edge/Project/Portal-do-Governo/Portal-do-Governo/gc24/Files/Documentos/relatorio-gt-subsidio-social-mobilidade.pdf",
+      "explicacao_pt": "O relatório final é público e a data de apresentação está documentada em fonte oficial: 30 de setembro de 2024, exatamente o prazo prorrogado. Por isso a entrega é dada como cumprida dentro do prazo.",
+      "nota_pt": "A auditoria de 12 de outubro de 2026 confirmou o resultado final e a data de apresentação. Continua por obter o documento original da prorrogação e o comprovativo de receção pelo ministério."
+    },
+    "GT-2024-008": {
+      "prazo_aplicavel": null,
+      "resultado_url": "https://diariodarepublica.pt/dr/detalhe/resolucao-conselho-ministros/133-2026-1138160260",
+      "nota_pt": "A Resolução do Conselho de Ministros n.º 133/2026 aprova a estratégia «Água que Une», resultado deste grupo. A auditoria retirou o prazo de 19 de dezembro de 2024: a contagem do mandato não está estabelecida. Falta a data de entrega e de receção do relatório."
+    },
+    "GT-2024-010": {
+      "prazo_aplicavel": "2024-09-30",
+      "resultado_url": "https://centenariocarlosparedes.pt/",
+      "nota_pt": "A auditoria fixou o prazo em 30 de setembro de 2024 e identificou o programa oficial do centenário, publicado. Falta a data de transmissão e de aprovação da proposta."
+    },
+    "GT-2024-012": {
+      "resultado_url": "https://www.dgartes.gov.pt/sites/default/files/manualdocandidato_bv25.pdf",
+      "nota_pt": "O manual oficial da DGARTES identifica as propostas e equipas selecionadas por este grupo. Não foram localizadas as atas de avaliação nem a decisão de seleção original."
+    },
+    "GT-2024-014": {
+      "resultado_url": "https://diariodarepublica.pt/dr/detalhe/portaria/228-2025-918823456",
+      "nota_pt": "A Portaria n.º 228/2025/1 adota o modelo RVD-R revisto, atribuível a este grupo. Não foi localizado um relatório final do grupo, nem as atas das reuniões trimestrais."
+    },
+    "GT-2024-016": {
+      "resultado_url": "https://diariodarepublica.pt/dr/detalhe/resolucao-conselho-ministros/34-2025-909307237",
+      "nota_pt": "A Estratégia Única para os Direitos das Crianças e Jovens 2025-2035 foi aprovada pela Resolução do Conselho de Ministros n.º 34/2025. Não foram localizadas as versões da avaliação e da proposta submetidas pelo grupo, nem as respetivas datas."
+    },
+    "GT-2024-018": {
+      "nota_pt": "Relatórios oficiais do INPI confirmam a entrega de forma indireta, mas o documento de conclusões e o registo de submissão não foram localizados. Permanece a divergência de datas entre as fontes oficiais."
+    },
+    "GT-2024-028": {
+      "resultado_url": "https://diariodarepublica.pt/dr/detalhe/decreto-lei/59-a-2024-889277040",
+      "nota_pt": "O Decreto-Lei n.º 59-A/2024 concretiza expressamente medidas propostas por este grupo. Não foi localizado um plano de ação ou relatório autónomo, nem o registo das reuniões."
+    },
+    "GT-2024-029": {
+      "estado": "Concluído com atraso",
+      "atraso_dias": null,
+      "prazo_aplicavel": "2025-01-31",
+      "data_relatorio": "2025-03-31",
+      "data_publicacao": "2025-05-05",
+      "resultado_url": "https://www.consultalex.gov.pt/Portal_Consultas_Publicas_UI/ConsultaPublica_Detail.aspx?Consulta_Id=372",
+      "explicacao_pt": "O anteprojeto foi apresentado em abril de 2025, depois do prazo fixado de 31 de janeiro de 2025, segundo a exposição de motivos da proposta do Governo. O anteprojeto e o relatório estão públicos na ConsultaLEX n.º 372. A entrega está estabelecida; o dia exato não, pelo que não se conta um número de dias de atraso.",
+      "nota_pt": "A auditoria de 12 de outubro de 2026 estabeleceu a entrega e o facto de ter sido tardia. Falta a data exata de submissão e de receção, e saber se existiu uma prorrogação interna não publicada."
+    },
+    "GT-2024-030": {
+      "prazo_aplicavel": null,
+      "resultado_url": "https://portugal.gov.pt/api/media/edge/Project/Portal-do-Governo/Portal-do-Governo/gc24/Files/Documentos/relatorio-combate-bullying.pdf",
+      "nota_pt": "O relatório final, com 79 páginas e anexos, é público. A auditoria retirou o prazo de 31 de dezembro de 2024, por não estar estabelecido como data final vinculativa. Falta a data de transmissão interna."
+    },
+    "GT-2024-045": {
+      "nota_pt": "Não foi localizado um relatório autónomo do Plano TERRA. A Resolução do Conselho de Ministros n.º 181/2026 e o anexo da Estratégia TERRA+ são públicos e reconhecem expressamente o trabalho do grupo."
+    },
+    "GT-2024-047": {
+      "resultado_url": "https://www.etf.gov.pt/media/doc/relatorio-GT-SEE.pdf",
+      "nota_pt": "O relatório completo, com 47 páginas e anexos, está disponível no sítio da ETF. Falta a data de entrega e de receção, e o dia exato da primeira divulgação pública, em julho de 2026."
+    },
+    "GT-2025-004": {
+      "prazo_aplicavel": null,
+      "nota_pt": "A auditoria retirou o prazo de 21 de abril de 2025: o evento que inicia a contagem dos 60 dias úteis não está estabelecido no ato. Não foi localizado relatório final."
+    },
+    "GT-2025-008": {
+      "nota_pt": "O relatório do grupo não foi localizado. A Portaria n.º 229/2025/1 regista a sua existência e algumas conclusões, mas não permite distinguir se corresponde às conclusões finais ou a um estudo intercalar de tarifas."
+    },
+    "GT-2025-010": {
+      "resultado_url": "https://www.dgartes.gov.pt/pt/noticia/9062",
+      "nota_pt": "Os nomes e projetos selecionados são públicos. Não foram localizadas as atas nem a data da seleção e da sua transmissão."
+    },
+    "GT-2025-011": {
+      "nota_pt": "A auditoria não localizou registo de funcionamento do grupo nem avaliações ou propostas submetidas. Fica por esclarecer a relação com o anteprojeto «Trabalho XXI»."
+    },
+    "GT-2025-014": {
+      "estado": "Em atraso",
+      "atraso_dias": 283,
+      "prazo_aplicavel": "2025-12-31",
+      "explicacao_pt": "O ato fixa expressamente 31 de dezembro de 2025 para o relatório final e esse prazo passou sem que a auditoria localizasse confirmação oficial da entrega. Os dias contados medem a posição de acompanhamento até ao corte de evidência, não uma falta de entrega comprovada.",
+      "nota_pt": "A auditoria de 12 de outubro de 2026 estabeleceu o prazo expresso, que o retrato anterior não tinha identificado. Uma reunião noticiada em maio de 2026 não substitui a obrigação final."
+    },
+    "GT-2025-017": {
+      "prazo_aplicavel": null,
+      "nota_pt": "A auditoria retirou o prazo de 29 de setembro de 2025: a regra de contagem aplicável não está estabelecida. Não foi localizado o texto nem a data do relatório final."
+    },
+    "GT-2025-025": {
+      "prazo_aplicavel": null,
+      "nota_pt": "A auditoria retirou o prazo de 13 de setembro de 2025, por o ato contar 30 dias a partir da constituição do grupo, data que não é pública. Não foi localizada a constituição efetiva nem o relatório de avaliação."
+    },
+    "GT-2025-037": {
+      "estado": "Em atraso",
+      "atraso_dias": 127,
+      "prazo_aplicavel": "2026-06-05",
+      "explicacao_pt": "O ato fixa expressamente 5 de junho de 2026 como marco do grupo e esse prazo passou sem que a auditoria localizasse confirmação de entrega. Os dias contados medem a posição de acompanhamento até ao corte de evidência; não provam que o grupo não tenha entregado.",
+      "nota_pt": "A auditoria de 12 de outubro de 2026 estabeleceu o marco expresso, que o retrato anterior não tinha identificado. Falta o registo das reuniões e a ligação entre as propostas do grupo e o Decreto-Lei n.º 94/2026."
+    },
+    "GT-2025-038": {
+      "resultado_url": "https://bo.digital.gov.pt/api/assets/etic/25f07edd-cf33-4e0e-9b22-c7d85b3502a9/",
+      "nota_pt": "Existe um relatório público sobre a primeira fase do programa. O Despacho n.º 5286/2026 cria formalmente a rede de embaixadoras. Fica por explicar porque é que um relatório datado de 10 de abril descreve um período de seis meses, se o grupo foi criado em novembro."
+    },
+    "GT-2025-039": {
+      "estado": "Extinto / substituído",
+      "atraso_dias": null,
+      "explicacao_pt": "Fontes oficiais identificam expressamente o termo dos trabalhos deste grupo e a cessação de funções do coordenador. A extinção está documentada e não é inferida apenas da aprovação da política.",
+      "nota_pt": "A auditoria de 12 de outubro de 2026 estabeleceu a extinção. Falta a data exata de encerramento e o âmbito da transferência técnica."
+    },
+    "GT-2025-040": {
+      "nota_pt": "A auditoria não localizou início de trabalhos, atividade do grupo nem entrega de relatório ou proposta. O estado mantém-se."
+    },
+    "GT-2025-041": {
+      "prazo_aplicavel": null,
+      "resultado_url": "https://www.dgav.pt/wp-content/uploads/2026/03/PANUSPF-2025-2030.pdf",
+      "nota_pt": "O PANUSPF 2025-2030 revisto é público. A auditoria retirou o prazo de 31 de dezembro de 2025, por depender do encerramento da consulta pública, cuja data e regra de contagem não estão estabelecidas."
+    },
+    "GT-2026-001": {
+      "nota_pt": "A auditoria não localizou registo de membros nem de trabalhos. Há um conflito por resolver entre as datas de 5 e 17 de dezembro para o contrato."
+    },
+    "GT-2026-003": {
+      "resultado_url": "https://ai2participa.pt/docs/RelatGrupoTrab_PT.pdf",
+      "nota_pt": "O relatório do grupo é público e foi reutilizado no debate oficial de definição de prioridades. Falta o dia exato de produção, a primeira divulgação pública e a data de extinção."
+    },
+    "GT-2026-005": {
+      "prazo_aplicavel": "2026-03-31",
+      "resultado_url": "https://portugal.gov.pt/api/media/edge/Project/Portal-do-Governo/Portal-do-Governo/gc25/Files/Documentos/orientacoes-atividades-instituicoes-ensino.pdf",
+      "nota_pt": "A auditoria fixou o prazo em 31 de março de 2026 e identificou as orientações e a lista de verificação publicadas. O Ministério descreve-as como meramente indicativas; a adoção efetiva nas escolas não está verificada."
+    },
+    "GT-2026-015": {
+      "nota_pt": "A auditoria não localizou representantes designados, atas nem projeto de proposta. Fica por esclarecer o significado do trimestre indicado no ato e o facto gerador da entrada em vigor."
+    },
+    "GT-2026-016": {
+      "estado": "Em curso – dentro do prazo",
+      "atraso_dias": null,
+      "prazo_aplicavel": "2026-12-31",
+      "explicacao_pt": "O prazo fixado para a proposta é o final de 2026 e ainda não passou à data do corte de evidência. Existe acompanhamento institucional documentado, mas as reuniões e a elaboração não estão confirmadas de forma independente.",
+      "nota_pt": "A auditoria de 12 de outubro de 2026 identificou o prazo expresso de final de 2026, que o retrato anterior não tinha registado."
+    },
+    "GT-2026-017": {
+      "prazo_aplicavel": null,
+      "nota_pt": "A auditoria retirou o prazo de 15 de setembro de 2026: o ato não identifica o facto gerador da contagem dos 90 dias nem se são seguidos ou úteis. A alternativa em dias úteis aponta para 23 de outubro de 2026."
+    },
+    "GT-2026-018": {
+      "estado": "Em curso – dentro do prazo",
+      "atraso_dias": null,
+      "prazo_aplicavel": "2026-11-27",
+      "explicacao_pt": "O ato fixa expressamente 27 de novembro de 2026 para a proposta sobre urgências centralizadas, prazo que ainda não passou. Evidência oficial de julho e agosto confirma atividade da coordenação do grupo. A conclusão integral não está estabelecida.",
+      "nota_pt": "Correção relevante: o retrato anterior aplicava a regra genérica de 90 dias e fixava o prazo em 15 de setembro de 2026. A auditoria mostrou que esse prazo de 90 dias pertence à implementação de um sistema de auditoria clínica, e que a obrigação do grupo tem data expressa no ato — «deve ser objeto de proposta até 27 de novembro de 2026»."
+    },
+    "GT-2026-019": {
+      "prazo_aplicavel": null,
+      "nota_pt": "A auditoria retirou o prazo de 15 de setembro de 2026: o ato não identifica o facto gerador da contagem dos 90 dias nem se são seguidos ou úteis. A alternativa em dias úteis aponta para 23 de outubro de 2026."
+    },
+    "GT-2026-020": {
+      "prazo_aplicavel": null,
+      "nota_pt": "A auditoria retirou o prazo de 16 de setembro de 2026: o ato não identifica o facto gerador da contagem dos 90 dias nem se são seguidos ou úteis. A alternativa em dias úteis aponta para 23 de outubro de 2026."
+    }
+  }
+}
